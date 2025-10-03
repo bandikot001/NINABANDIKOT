@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mi Tienda — Packs Digitales</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- AGE GATE (ventana de verificación 18+) -->
+  <div id="age-gate">
+    <div class="age-box">
+      <h2>¿Tienes 18 años o más?</h2>
+      <p>Este sitio contiene material solo para adultos (SFW, no explícito).</p>
+      <button onclick="enterSite()">Sí, soy mayor de 18</button>
+      <button onclick="window.location.href='https://www.google.com'">No, salir</button>
+    </div>
+  </div>
+  <script>
+    function enterSite(){
+      document.getElementById('age-gate').style.display = 'none';
+      localStorage.setItem('ageConfirmed', 'true');
+    }
+    window.onload = function(){
+      if(localStorage.getItem('ageConfirmed') === 'true'){
+        document.getElementById('age-gate').style.display = 'none';
+      }
+    }
+  </script>
+
+  <!-- CONTENIDO DE LA TIENDA -->
+  <div class="page-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <h1>Packs Fotográficos (18+ SFW)</h1>
+    <p>(Previews no explícitos. Solo modelos adultas).</p>
+  </header>
+
+  <main class="grid">
+    <article class="card" style="--card-image:url('/assets/entry.jpg')">
+      <div class="card-content">
+        <h2>Entry</h2>
+        <p>~25 fotos + 1 clip corto (1080p)</p>
+        <a class="btn"
+           href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=19.00&currencyCode=840&customProductId=ENTRY_001">
+          Comprar
+        </a>
+      </div>
+    </article>
+
+    <article class="card" style="--card-image:url('/assets/deluxe.jpg')">
+      <div class="card-content">
+        <h2>Deluxe</h2>
+        <p>~50 fotos + 2–3 clips (1080–1440p)</p>
+        <a class="btn"
+           href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=39.00&currencyCode=840&customProductId=DELUXE_001">
+          Comprar
+        </a>
+      </div>
+    </article>
+
+    <article class="card" style="--card-image:url('/assets/bundle.jpg')">
+      <div class="card-content">
+        <h2>Bundle</h2>
+        <p>3 packs + bonus</p>
+        <a class="btn"
+           href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=99.00&currencyCode=840&customProductId=BUNDLE_001">
+          Comprar
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <small>© 2025 — Mi Tienda Digital. SFW, 18+.</small>
+  </footer>
+</body>
+</html>
