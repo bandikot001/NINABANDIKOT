@@ -1,320 +1,207 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Photo Packs — AI-Only, SFW (Luxury)</title>
-
-  <!-- Premium fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Photo Packs (18+ SFW)</title>
   <style>
-    /* ===== LUXURY THEME: GOLD / BLACK / NEON ===== */
-    :root{
-      --bg-image: url("/img/bg.jpg");
-      --overlay: rgba(0,0,0,.55);
-      --text: #ececec;
-      --muted: #b8c0cc;
-
-      /* Luxury accents */
-      --gold: #f5d36c;                /* soft gold */
-      --gold-deep: #c8a63f;           /* deeper gold for contrast */
-      --neon: #ff2bd1;                /* neon magenta */
-      --neon-cyan: #2df4ff;           /* neon cyan (subtle hints) */
-
-      --btn-glow: rgba(255,43,209,.35);   /* neon glow */
-      --border: rgba(255,255,255,.12);
-      --panel: rgba(10,10,12,.65);
+    :root {
+      --bg-color: #000;
+      --text-color: #fff;
+      --accent-color: #FFD700; /* Gold */
+      --neon-color: #ff00ff; /* Magenta */
+      --card-radius: 14px;
+      --transition: 0.3s ease-in-out;
+      --bg-image: url("img/bg.jpg");
     }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; color:var(--text);
-      background:#050507 var(--bg-image) center/cover fixed no-repeat;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
     }
-
-    /* Subtle advisory (not invasive) */
-    .advisory{
-      position:sticky; top:0; z-index:100; width:100%;
-      display:flex; justify-content:center;
-      gap:10px; align-items:center;
-      padding:6px 10px;
-      font-size:12px; line-height:1.2; color:#e9e2cf;
-      background: rgba(8,8,10,.55);            /* translucent dark */
-      border-bottom: 1px solid rgba(245,211,108,.25); /* thin gold line */
-      backdrop-filter: blur(6px);
+    body {
+      background: var(--bg-color) no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-    .advisory strong{ color:var(--gold); font-weight:800 }
-
-    /* Global overlay for readability */
-    .page-overlay{position:fixed; inset:0; background:var(--overlay); pointer-events:none; z-index:0}
-
-    /* Age gate */
-    #age-gate{
-      position:fixed; inset:0; z-index:9999;
-      background:rgba(0,0,0,.92);
-      display:flex; align-items:center; justify-content:center;
+    header {
+      background: rgba(0,0,0,0.7);
+      color: var(--accent-color);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 6px;
+      border-bottom: 1px solid var(--accent-color);
     }
-    .age-box{
-      background: linear-gradient(180deg, rgba(14,14,18,.9), rgba(14,14,18,.75));
-      color:var(--text); padding:26px; border-radius:18px;
-      width:min(92vw,440px); border:1px solid rgba(245,211,108,.25);
-      box-shadow: 0 30px 80px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.02) inset;
-      text-align:center; font-family: Outfit, Inter, sans-serif;
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 2.2rem;
+      color: var(--neon-color);
     }
-    .age-box h2{ margin:0 0 10px; font-weight:800; letter-spacing:.2px }
-    .age-box p{ margin:0 0 16px; color:var(--muted) }
-    .age-actions{ display:flex; gap:10px; justify-content:center }
-
-    /* Header */
-    .site-header,.site-footer{ position:relative; z-index:1; text-align:center }
-    .site-header{ padding:40px 16px 10px }
-    .site-header h1{
-      margin:0 0 8px; font-family:Outfit, Inter, sans-serif; font-weight:800;
-      letter-spacing:.3px;
-      background: linear-gradient(90deg, var(--gold), var(--neon));
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+    main.grid {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 20px;
+      flex-wrap: wrap;
     }
-    .site-header p{ margin:0; color:var(--muted) }
-
-    /* Grid */
-    .grid{
-      display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      gap:26px; padding:26px; width:min(1120px, 92%); margin:0 auto;
-      position:relative; z-index:1;
+    article.card {
+      position: relative;
+      width: 300px;
+      height: 420px;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 0 20px rgba(255,215,0,0.2);
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
     }
-
-    /* Cards */
-    .card{
-      position:relative; overflow:hidden;
-      border-radius:20px; border:1px solid var(--border);
-      min-height:300px; display:flex; align-items:flex-end;
-      background:#0f1115;
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-      will-change: transform;
-      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+    article.card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255,0,255,0.4);
     }
-    .card::before{
-      content:""; position:absolute; inset:0;
-      background-image: var(--card-image, none);
-      background-size: cover; background-position: center;
+    article.card::before {
+      content: "";
+      background: var(--card-image) center/cover no-repeat;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      transition: filter var(--transition);
     }
-    /* Only a bottom gradient—keep model clear */
-    .card::after{
-      content:""; position:absolute; left:0; right:0; bottom:0; height:60%;
-      background: linear-gradient(to top, rgba(0,0,0,.70) 0%, rgba(0,0,0,0) 100%);
+    article.card:hover::before {
+      filter: brightness(0.5) blur(2px);
     }
-    .card-content{
-      position:absolute; left:0; right:0; bottom:0;
-      padding: 14px 16px;
+    .card-content {
+      position: relative;
+      z-index: 2;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
     }
-    .card-content h2{
-      margin:0 0 8px; font-size:19px; font-weight:800;
-      font-family:Outfit, Inter, sans-serif;
-      text-shadow: 0 2px 10px rgba(0,0,0,.55);
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
     }
-    .mini-list{
-      display:none; margin:8px 0 10px; padding-left:16px;
-      line-height:1.28; font-size:13px; color:var(--muted);
+    .mini-list {
+      list-style: none;
+      font-size: 0.9rem;
+      line-height: 1.4rem;
+      opacity: 0;
+      transition: opacity var(--transition);
     }
-    .card:hover .mini-list, .card.open .mini-list{ display:block }
-
-    /* Luxury 3D / glass button with gold ring + neon glow */
-    .btn{
-      --ring: linear-gradient(90deg, var(--gold), var(--neon));
-      position:relative; display:inline-flex; align-items:center; justify-content:center;
-      padding: 11px 16px; font-weight:800; letter-spacing:.25px;
-      color:#0b0b0e; text-decoration:none; cursor:pointer;
-      border-radius:12px; border:1px solid rgba(255,255,255,.10);
-      background: rgba(245,211,108,.22);            /* translucent gold */
-      backdrop-filter: blur(10px);
-      box-shadow:
-        0 12px 26px var(--btn-glow),
-        0 8px 22px rgba(0,0,0,.35),
-        inset 0 0 0 1px rgba(255,255,255,.06);
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    article.card:hover .mini-list {
+      opacity: 1;
+      color: #fff;
+      text-shadow: 0 0 6px rgba(0,0,0,0.9);
     }
-    .btn::before{
-      content:""; position:absolute; inset:-1px; z-index:-1; border-radius:inherit;
-      padding:1px; background: var(--ring);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
+    a.btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 16px;
+      text-align: center;
+      border-radius: 8px;
+      font-weight: bold;
+      background: rgba(255,215,0,0.9);
+      color: #000;
+      text-decoration: none;
+      transition: transform var(--transition), background var(--transition);
+      box-shadow: 0 0 10px rgba(255,215,0,0.6);
     }
-    .btn:hover{
-      transform: translateY(-3px) scale(1.02);
-      box-shadow:
-        0 20px 46px rgba(255,43,209,.45),
-        0 10px 30px rgba(0,0,0,.4),
-        inset 0 0 0 1px rgba(255,255,255,.12);
+    a.btn:hover {
+      background: var(--neon-color);
+      color: #fff;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 20px rgba(255,0,255,0.7);
     }
-    .btn:active{ transform: translateY(-1px) scale(.99) }
-    .btn.btn-outline{
-      background: transparent; color: var(--text);
+    /* Collapsible Legal Notice */
+    footer {
+      margin-top: auto;
+      background: rgba(0,0,0,0.7);
+      text-align: center;
+      padding: 8px;
+      font-size: 0.75rem;
     }
-    .btn.btn-outline:hover{ background: rgba(255,255,255,.06) }
-    .info-toggle{
-      margin-left:10px; font-size:12px; color:#d7deea; text-decoration:underline;
+    details {
+      color: #999;
+      cursor: pointer;
     }
-
-    /* Minimal legal (collapsible, very small) */
-    .legal{
-      position:relative; z-index:1; width:min(1120px, 92%);
-      margin:10px auto 24px; background: var(--panel);
-      border: 1px solid rgba(245,211,108,.15); border-radius: 12px;
-      padding: 6px 10px;
+    details summary {
+      outline: none;
+      font-size: 0.8rem;
+      color: var(--accent-color);
     }
-    .legal details{ font-size:11.5px; line-height:1.35; color:#aeb8c8 }
-    .legal summary{
-      list-style:none; cursor:pointer; font-weight:700; color:#f0e7c4; font-size:12px;
-    }
-    .legal summary::-webkit-details-marker{ display:none }
-    .legal details[open] summary{ opacity:.95; margin-bottom:4px }
-
-    .site-footer{
-      padding:8px 16px 26px; color:#a9b3c5; font-size:12px; text-align:center;
-    }
-
-    /* Mobile: push gradient a bit higher for readability */
-    @media (max-width: 640px){
-      .card::after{ height:68%; }
+    details p {
+      margin-top: 6px;
+      font-size: 0.7rem;
+      color: #bbb;
     }
   </style>
 </head>
 <body>
-
-  <!-- Subtle advisory -->
-  <div class="advisory">
-    <strong>Advisory:</strong> SFW, non-explicit previews. AI-generated visuals only. Adults 18+.
-  </div>
-
-  <!-- AGE GATE -->
-  <div id="age-gate">
-    <div class="age-box">
-      <h2>Are you 18 or older?</h2>
-      <p>This website features SFW (non-explicit) adult-themed content generated 100% with AI.</p>
-      <div class="age-actions">
-        <button class="btn" onclick="enterSite()">Yes, I’m 18+</button>
-        <a class="btn btn-outline" href="https://www.google.com">No, leave</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- HEADER -->
-  <header class="site-header">
-    <h1>Photo Packs (18+ · SFW)</h1>
-    <p>Non-explicit previews. AI-created visuals only — no real persons.</p>
+  <header>
+    Advisory: SFW, non-explicit previews. AI-generated visuals only. Adults 18+.
   </header>
 
-  <!-- GRID -->
+  <h1>Photo Packs (18+ • SFW)</h1>
+  <p style="text-align:center; margin-bottom:20px; font-size:0.9rem;">Non-explicit previews. AI-created visuals only — no real persons.</p>
+
   <main class="grid">
     <!-- Entry -->
-    <article class="card tilt" style="--card-image:url('/img/entry.jpg')">
+    <article class="card" style="--card-image:url('img/entry.jpg')">
       <div class="card-content">
         <h2>Entry — $15</h2>
-        <a class="btn"
-           href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=15.00&currencyCode=840&customProductId=ENTRY_001">
-          Buy now
-        </a>
-        <a href="#" class="info-toggle">Details</a>
         <ul class="mini-list">
           <li>25 HQ photos (≈2000–3000 px)</li>
-          <li>1 short clip (30–60 s, 1080p)</li>
-          <li>Private link (48h · 3 attempts) · AI-generated · 18+</li>
+          <li>1 short clip (30–60s, 1080p)</li>
+          <li>Private link (48h, 3 attempts)</li>
+          <li>AI-generated • Adults 18+</li>
         </ul>
+        <a class="btn" href="#">Buy now</a>
       </div>
     </article>
 
     <!-- Deluxe -->
-    <article class="card tilt" style="--card-image:url('/img/deluxe.jpg')">
+    <article class="card" style="--card-image:url('img/deluxe.jpg')">
       <div class="card-content">
         <h2>Deluxe — $39</h2>
-        <a class="btn"
-           href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=39.00&currencyCode=840&customProductId=DELUXE_001">
-          Buy now
-        </a>
-        <a href="#" class="info-toggle">Details</a>
         <ul class="mini-list">
           <li>50 HQ photos (≈3000 px)</li>
           <li>3 clips total 3–5 min (1080–1440p)</li>
-          <li>+5 wallpapers (bonus) · Private link 48h</li>
+          <li>+5 wallpapers (bonus)</li>
+          <li>Private link (48h, 3 attempts)</li>
         </ul>
+        <a class="btn" href="#">Buy now</a>
       </div>
     </article>
 
     <!-- Bundle -->
-    <article class="card tilt" style="--card-image:url('/img/bundle.jpg')">
+    <article class="card" style="--card-image:url('img/bundle.jpg')">
       <div class="card-content">
         <h2>Bundle — $99</h2>
-        <a class="btn"
-           href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=99.00&currencyCode=840&customProductId=BUNDLE_001">
-          Buy now
-        </a>
-        <a href="#" class="info-toggle">Details</a>
         <ul class="mini-list">
           <li>3 full collections (150+ HQ photos)</li>
           <li>6–8 clips total 8–12 min (1080–1440p)</li>
-          <li>Extras: BTS + wallpapers · Best value</li>
+          <li>Extras: BTS + wallpapers</li>
+          <li>Best value pack</li>
         </ul>
+        <a class="btn" href="#">Buy now</a>
       </div>
     </article>
   </main>
 
-  <!-- Minimal legal (collapsible) -->
-  <section class="legal">
+  <footer>
     <details>
       <summary>Legal notice</summary>
-      <p>
-        All visuals on this website are <strong>100% AI-generated</strong> and depict fictional adults only (18+).
-        No explicit content is offered. Access is restricted to adults. Download links are time-limited for personal use.
-      </p>
+      <p>All visuals on this site are 100% AI-generated. They depict fictional adults only. No real persons are represented. Access restricted to 18+. Non-explicit previews. Temporary download links provided for personal use only.</p>
     </details>
-  </section>
-
-  <footer class="site-footer">
-    <small>© 2025 — AI-Only, SFW. All rights reserved.</small>
+    <p style="margin-top:8px; font-size:0.65rem; color:#666;">© 2025 — AI-Only, SFW. All rights reserved.</p>
   </footer>
-
-  <!-- Overlay -->
-  <div class="page-overlay" aria-hidden="true"></div>
-
-  <!-- Scripts -->
-  <script>
-    // Age gate
-    function enterSite(){
-      document.getElementById('age-gate').style.display = 'none';
-      localStorage.setItem('ageConfirmed','true');
-    }
-    window.addEventListener('load', () => {
-      if(localStorage.getItem('ageConfirmed') === 'true'){
-        document.getElementById('age-gate').style.display = 'none';
-      }
-    });
-
-    // Subtle 3D tilt (parallax) on cards
-    const cards = document.querySelectorAll('.tilt');
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        const x = e.clientX - r.left;
-        const y = e.clientY - r.top;
-        const rotY = ((x / r.width) - 0.5) * 8;
-        const rotX = -((y / r.height) - 0.5) * 8;
-        card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-      });
-      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-    });
-
-    // Details toggle for mobile/touch
-    document.querySelectorAll('.info-toggle').forEach(link=>{
-      link.addEventListener('click', (e)=>{
-        e.preventDefault();
-        const card = link.closest('.card');
-        card.classList.toggle('open');
-      });
-    });
-  </script>
 </body>
 </html>
