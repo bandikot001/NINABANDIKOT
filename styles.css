@@ -182,3 +182,51 @@ body{
 @media (min-width: 1200px){
   .site-header{ padding-top:56px; }
 }
+/* ==== SHOW THE MODEL: image crisp, text only at bottom ==== */
+
+/* Quita filtros a la foto */
+.card::before{
+  content:""; position:absolute; inset:0;
+  background-image: var(--card-image, none);
+  background-size: cover; background-position: center;
+  filter: none;               /* antes: saturate/contrast/brightness */
+  transform: none;            /* antes: scale(1.03) */
+}
+
+/* En vez de velo completo, solo degradado inferior (no tapa la modelo) */
+.card::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 55%);
+}
+
+/* El contenido va pegado ABAJO, sin blur */
+.card-content{
+  position:absolute; left:0; right:0; bottom:0;
+  padding: 14px 16px;
+  backdrop-filter: none;      /* antes: blur(2px) */
+}
+
+/* Tipografía más compacta para no cubrir la imagen */
+.card-content h2{ font-size: 18px; margin: 0 0 6px; }
+.mini-list{ 
+  display: none;              /* oculto por defecto */
+  margin: 0 0 10px; 
+  padding-left: 16px; 
+  line-height: 1.25; 
+  font-size: 13px; 
+  opacity: .95;
+}
+
+/* Al pasar el mouse mostramos bullets; aún así solo ocupan el área baja */
+.card:hover .mini-list,
+.card.open .mini-list{ display: block; }
+
+/* Botón compacto, no tapa: */
+.btn.btn-3d{ padding: 10px 14px; font-size: 14px; }
+
+/* En pantallas chicas, que el degradado suba un poco más para legibilidad */
+@media (max-width: 640px){
+  .card::after{
+    background: linear-gradient(to top, rgba(0,0,0,.62) 0%, rgba(0,0,0,0) 65%);
+  }
+}
