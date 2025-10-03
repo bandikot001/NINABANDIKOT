@@ -1,81 +1,136 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mi Tienda — Packs Digitales</title>
+  <title>Photo Packs — AI-Only, SFW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- AGE GATE (ventana de verificación 18+) -->
+
+  <!-- Advisory banner (top, short and clear) -->
+  <div class="advisory">
+    <strong>Advisory:</strong> This site features non-explicit, SFW content. Models depicted are <strong>adults (18+)</strong>.
+  </div>
+
+  <!-- AGE GATE -->
   <div id="age-gate">
     <div class="age-box">
-      <h2>¿Tienes 18 años o más?</h2>
-      <p>Este sitio contiene material solo para adultos (SFW, no explícito).</p>
-      <button onclick="enterSite()">Sí, soy mayor de 18</button>
-      <button onclick="window.location.href='https://www.google.com'">No, salir</button>
+      <h2>Are you 18 or older?</h2>
+      <p>This website contains SFW (non-explicit) adult-themed content created with AI only.</p>
+      <div class="age-actions">
+        <button class="btn" onclick="enterSite()">Yes, I’m 18+</button>
+        <a class="btn btn-outline" href="https://www.google.com">No, leave</a>
+      </div>
     </div>
   </div>
-  <script>
-    function enterSite(){
-      document.getElementById('age-gate').style.display = 'none';
-      localStorage.setItem('ageConfirmed', 'true');
-    }
-    window.onload = function(){
-      if(localStorage.getItem('ageConfirmed') === 'true'){
-        document.getElementById('age-gate').style.display = 'none';
-      }
-    }
-  </script>
 
-  <!-- CONTENIDO DE LA TIENDA -->
-  <div class="page-overlay" aria-hidden="true"></div>
-
+  <!-- Main header -->
   <header class="site-header">
-    <h1>Packs Fotográficos (18+ SFW)</h1>
-    <p>(Previews no explícitos. Solo modelos adultas).</p>
+    <h1>Photo Packs (18+ · SFW)</h1>
+    <p>Non-explicit previews. AI-created visuals only — no real persons.</p>
   </header>
 
+  <!-- Product grid -->
   <main class="grid">
-    <article class="card" style="--card-image:url('/img/entry.jpg')">
-
+    <!-- Entry -->
+    <article class="card tilt" style="--card-image:url('/img/entry.jpg')">
       <div class="card-content">
-        <h2>Entry</h2>
-        <p>~25 fotos + 1 clip corto (1080p)</p>
-        <a class="btn"
-           href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=19.00&currencyCode=840&customProductId=ENTRY_001">
-          Comprar
+        <h2>Entry — $15</h2>
+        <ul class="mini-list">
+          <li>25 HQ photos (≈2000–3000 px)</li>
+          <li>1 short clip (30–60 s, 1080p)</li>
+          <li>Instant download — private link (48h, 3 attempts)</li>
+          <li>SFW · Adults 18+ · AI-generated</li>
+        </ul>
+        <a class="btn btn-3d"
+           href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=15.00&currencyCode=840&customProductId=ENTRY_001">
+          Buy now
         </a>
       </div>
     </article>
 
-    <article class="card" style="--card-image:url('/img/deluxe.jpg')">
-
+    <!-- Deluxe -->
+    <article class="card tilt" style="--card-image:url('/img/deluxe.jpg')">
       <div class="card-content">
-        <h2>Deluxe</h2>
-        <p>~50 fotos + 2–3 clips (1080–1440p)</p>
-        <a class="btn"
+        <h2>Deluxe — $39</h2>
+        <ul class="mini-list">
+          <li>50 HQ photos (≈3000 px)</li>
+          <li>3 clips total 3–5 min (1080–1440p)</li>
+          <li>+5 wallpapers (bonus)</li>
+          <li>Private link (48h, 3 attempts) · AI-generated</li>
+        </ul>
+        <a class="btn btn-3d"
            href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=39.00&currencyCode=840&customProductId=DELUXE_001">
-          Comprar
+          Buy now
         </a>
       </div>
     </article>
 
-    <article class="card" style="--card-image:url('/img/bundle.jpg')">
-
+    <!-- Bundle -->
+    <article class="card tilt" style="--card-image:url('/img/bundle.jpg')">
       <div class="card-content">
-        <h2>Bundle</h2>
-        <p>3 packs + bonus</p>
-        <a class="btn"
+        <h2>Bundle — $99</h2>
+        <ul class="mini-list">
+          <li>3 full collections (150+ HQ photos)</li>
+          <li>6–8 clips total 8–12 min (1080–1440p)</li>
+          <li>Extras: BTS + wallpapers</li>
+          <li>Best value · Private link 48h (3 attempts)</li>
+        </ul>
+        <a class="btn btn-3d"
            href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=99.00&currencyCode=840&customProductId=BUNDLE_001">
-          Comprar
+          Buy now
         </a>
       </div>
     </article>
   </main>
 
+  <!-- Disclaimer (legal + AI-only) -->
+  <section class="legal">
+    <h3>Disclaimer</h3>
+    <p>
+      All visuals on this website are <strong>100% AI-generated</strong> and depict fictional adults only.
+      No real persons are portrayed, and no explicit content is offered. Access is restricted to individuals aged 18 or older.
+      Download links are time-limited and intended for personal use. For support or inquiries, contact: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>.
+    </p>
+  </section>
+
   <footer class="site-footer">
-    <small>© 2025 — Mi Tienda Digital. SFW, 18+.</small>
+    <small>© 2025 — AI-Only, SFW. All rights reserved.</small>
   </footer>
+
+  <!-- Parallax overlay and scripts -->
+  <div class="page-overlay" aria-hidden="true"></div>
+
+  <script>
+    // Age gate
+    function enterSite(){
+      document.getElementById('age-gate').style.display = 'none';
+      localStorage.setItem('ageConfirmed', 'true');
+    }
+    window.addEventListener('load', () => {
+      if(localStorage.getItem('ageConfirmed') === 'true'){
+        document.getElementById('age-gate').style.display = 'none';
+      }
+    });
+
+    // Subtle 3D tilt on cards (mouse parallax)
+    const cards = document.querySelectorAll('.tilt');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        const rotateY = ((x / r.width) - 0.5) * 8;   // left/right
+        const rotateX = -((y / r.height) - 0.5) * 8; // up/down
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  </script>
 </body>
 </html>
