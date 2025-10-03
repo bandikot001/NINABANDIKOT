@@ -1,0 +1,112 @@
+:root{
+  --bg-image: url("/assets/bg.jpg"); /* (imagen de fondo general) */
+  --overlay: rgba(0,0,0,.55);        /* (oscurecedor sobre el fondo) */
+  --card-overlay: rgba(0,0,0,.35);   /* (velo oscuro en tarjetas) */
+  --text: #f3f4f6;
+  --accent: #9ae6b4;
+  --accent-hover: #86efac;
+  --border: rgba(255,255,255,.12);
+}
+
+*{ box-sizing: border-box; }
+body{
+  margin:0;
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background: #0b0b0b var(--bg-image) center/cover fixed no-repeat;
+  min-height:100vh;
+  position: relative;
+}
+
+.page-overlay{
+  position: fixed; inset: 0;
+  background: var(--overlay);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.site-header, .site-footer{ text-align:center; padding: 24px 16px; position: relative; z-index: 1; }
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 24px;
+  width:min(1100px, 92%);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Tarjetas con imagen de fondo */
+.card{
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 260px;
+  display:flex;
+  align-items: end;
+  transition: transform .2s ease, box-shadow .2s ease;
+  background: #111;
+}
+.card::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image: var(--card-image, none);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
+  filter: saturate(1.05) contrast(1.05) brightness(.9);
+}
+.card::after{
+  content:"";
+  position:absolute; inset:0;
+  background: var(--card-overlay);
+}
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,.35);
+}
+.card-content{
+  position: relative;
+  z-index: 1;
+  width:100%;
+  padding: 18px;
+  backdrop-filter: blur(2px);
+}
+.btn{
+  display:inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #07120a;
+  font-weight: 700;
+  text-decoration: none;
+}
+.btn:hover{ background: var(--accent-hover); }
+
+/* ====== Age Gate ====== */
+#age-gate{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.age-box{
+  background: #111;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 320px;
+  border: 1px solid rgba(255,255,255,.15);
+}
+.age-box h2{ margin: 0 0 12px; }
+.age-box p{ margin: 0 0 18px; opacity: .8; }
+.age-box button{
+  margin: 6px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8
