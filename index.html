@@ -1,18 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Photo Packs — AI-Only, SFW</title>
+  <title>Paquetes de fotos — IA (SFW)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- Inline CSS (override everything so you don't edit styles.css) -->
   <style>
     :root{
       --bg-image: url("/img/bg.jpg");
       --overlay: rgba(0,0,0,.55);
-      --card-overlay: rgba(0,0,0,0);
       --text: #eef2f5;
       --muted: #cbd5e1;
       --accent: #99f6e4;
@@ -27,35 +25,57 @@
       background:#0b0b0b var(--bg-image) center/cover fixed no-repeat;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
-    /* Advisory ribbon */
-    .advisory{position:sticky;top:0;z-index:100;width:100%;padding:10px 14px;text-align:center;color:#0a1214;background:linear-gradient(90deg,#99f6e4,#60a5fa);font-weight:600}
-    /* Dark overlay over background */
+    /* Aviso superior (más discreto) */
+    .advisory{
+      position:sticky;top:0;z-index:100;width:100%;
+      padding:8px 12px;text-align:center;
+      font-size:12.5px; color:#0a1214;
+      background:linear-gradient(90deg,#99f6e4,#60a5fa);
+      font-weight:600
+    }
+    /* Oscurecedor global sutil */
     .page-overlay{position:fixed;inset:0;background:var(--overlay);pointer-events:none;z-index:0}
+
     /* Age gate */
     #age-gate{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center}
-    .age-box{background:#0f1115;color:var(--text);padding:28px;border-radius:16px;width:min(92vw,420px);border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.6);text-align:center;font-family:Poppins,Inter,sans-serif}
-    .age-box h2{margin:0 0 10px;font-weight:800;letter-spacing:.2px}
-    .age-box p{margin:0 0 18px;color:var(--muted)}
+    .age-box{
+      background:#0f1115;color:var(--text);padding:24px;border-radius:16px;
+      width:min(92vw,420px);border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.6);text-align:center;
+      font-family:Poppins,Inter,sans-serif
+    }
+    .age-box h2{margin:0 0 8px;font-weight:800}
+    .age-box p{margin:0 0 14px;color:var(--muted)}
     .age-actions{display:flex;gap:10px;justify-content:center}
+
     /* Header */
     .site-header,.site-footer{position:relative;z-index:1;text-align:center}
-    .site-header{padding:44px 16px 14px}
-    .site-header h1{margin:0 0 10px;font-family:Poppins,Inter,sans-serif;font-weight:800;letter-spacing:.3px}
+    .site-header{padding:36px 16px 10px}
+    .site-header h1{margin:0 0 8px;font-family:Poppins,Inter,sans-serif;font-weight:800}
     .site-header p{margin:0;color:var(--muted)}
+
     /* Grid */
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px;padding:24px;width:min(1100px,92%);margin:0 auto;position:relative;z-index:1}
+    .grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+      gap:24px;padding:24px;width:min(1100px,92%);margin:0 auto;position:relative;z-index:1
+    }
+
     /* Card base (tilt) */
-    .card{position:relative;overflow:hidden;border-radius:18px;border:1px solid var(--border);min-height:280px;display:flex;align-items:flex-end;background:#0f1115;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;will-change:transform}
-    .card::before{content:"";position:absolute;inset:0;background-size:cover;background-position:center;filter:none;transform:none;background-image:var(--card-image,none)}
-    /* Only a bottom gradient so we see the model clearly */
-    .card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;background:linear-gradient(to top,rgba(0,0,0,.60) 0%,rgba(0,0,0,0) 100%)}
-    /* Bottom band for text (doesn't cover the photo) */
-    .card-content{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;backdrop-filter:none}
+    .card{
+      position:relative;overflow:hidden;border-radius:18px;border:1px solid var(--border);
+      min-height:280px;display:flex;align-items:flex-end;background:#0f1115;
+      transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;will-change:transform
+    }
+    .card::before{content:"";position:absolute;inset:0;background-image:var(--card-image,none);background-size:cover;background-position:center}
+    /* Degradado SOLO abajo (modelo clara) */
+    .card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;
+      background:linear-gradient(to top,rgba(0,0,0,.62) 0%,rgba(0,0,0,0) 100%)}
+    /* Franja inferior de texto */
+    .card-content{position:absolute;left:0;right:0;bottom:0;padding:12px 14px}
     .card-content h2{margin:0 0 6px;font-size:18px;font-weight:800;font-family:Poppins,Inter,sans-serif;text-shadow:0 2px 8px rgba(0,0,0,.45)}
-    .mini-list{display:none;margin:8px 0 10px;padding-left:16px;line-height:1.25;font-size:13px;color:var(--muted)}
-    /* Show details on hover or when .open (mobile tap) */
+    .mini-list{display:none;margin:6px 0 8px;padding-left:16px;line-height:1.25;font-size:13px;color:var(--muted)}
     .card:hover .mini-list,.card.open .mini-list{display:block}
-    /* Premium 3D/glass button */
+
+    /* Botón premium 3D/glass */
     .btn{
       --ring: linear-gradient(90deg,var(--accent),var(--accent-2));
       position:relative;display:inline-flex;align-items:center;justify-content:center;
@@ -70,56 +90,63 @@
     .btn:active{transform:translateY(-1px) scale(.99)}
     .btn.btn-outline{background:transparent;color:var(--text)}
     .btn.btn-outline:hover{background:rgba(255,255,255,.06)}
-    /* Details link (small, unobtrusive) */
     .info-toggle{margin-left:10px;font-size:12px;color:#cbd5e1;text-decoration:underline}
-    /* Legal */
-    .legal{position:relative;z-index:1;width:min(1100px,92%);margin:12px auto 28px;color:var(--muted);background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
-    .legal h3{margin:0 0 8px;font-family:Poppins,Inter,sans-serif;font-weight:800;color:var(--text)}
-    .site-footer{padding:10px 16px 28px;color:var(--muted)}
-    /* Mobile: a bit higher gradient for legibility */
+
+    /* Legal mínimo, colapsable y MUY pequeño */
+    .legal{
+      position:relative;z-index:1;width:min(1100px,92%);margin:10px auto 24px;
+      background:rgba(0,0,0,.20);border:1px solid rgba(255,255,255,.10);border-radius:10px;padding:6px 10px
+    }
+    .legal details{font-size:11.5px;line-height:1.35;color:#a8b3c5}
+    .legal summary{list-style:none;cursor:pointer;font-weight:700;color:#d9e1ea;font-size:12px}
+    .legal summary::-webkit-details-marker{display:none}
+    .legal details[open] summary{opacity:.92;margin-bottom:4px}
+
+    .site-footer{padding:8px 16px 24px;color:#a8b3c5;font-size:12px}
+
     @media (max-width:640px){.card::after{height:65%}}
   </style>
 </head>
 <body>
 
-  <!-- Advisory banner -->
+  <!-- Aviso superior -->
   <div class="advisory">
-    <strong>Advisory:</strong> SFW, non-explicit previews. Models are <strong>adults (18+)</strong>. AI-generated content only.
+    <strong>Aviso:</strong> Vistas previas no explícitas (SFW). Modelos representadas como <strong>adultas (18+)</strong>. Contenido generado por IA.
   </div>
 
   <!-- AGE GATE -->
   <div id="age-gate">
     <div class="age-box">
-      <h2>Are you 18 or older?</h2>
-      <p>This website contains SFW (non-explicit) adult-themed content created with AI only.</p>
+      <h2>¿Eres mayor de 18 años?</h2>
+      <p>Este sitio presenta contenido SFW (no explícito) con temática adulta, generado 100% con IA.</p>
       <div class="age-actions">
-        <button class="btn" onclick="enterSite()">Yes, I’m 18+</button>
-        <a class="btn btn-outline" href="https://www.google.com">No, leave</a>
+        <button class="btn" onclick="enterSite()">Sí, soy mayor de 18</button>
+        <a class="btn btn-outline" href="https://www.google.com">No, salir</a>
       </div>
     </div>
   </div>
 
-  <!-- Header -->
+  <!-- Encabezado -->
   <header class="site-header">
-    <h1>Photo Packs (18+ · SFW)</h1>
-    <p>Non-explicit previews. AI-created visuals only — no real persons.</p>
+    <h1>Paquetes de fotos (18+ · SFW)</h1>
+    <p>Vistas previas no explícitas. Solo imágenes creadas por IA — no hay personas reales.</p>
   </header>
 
-  <!-- Grid -->
+  <!-- Tarjetas -->
   <main class="grid">
     <!-- Entry -->
     <article class="card tilt" style="--card-image:url('/img/entry.jpg')">
       <div class="card-content">
-        <h2>Entry — $15</h2>
+        <h2>Entrada — $15</h2>
         <a class="btn"
            href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=15.00&currencyCode=840&customProductId=ENTRY_001">
-          Buy now
+          Comprar ahora
         </a>
-        <a href="#" class="info-toggle">Details</a>
+        <a href="#" class="info-toggle">Detalles</a>
         <ul class="mini-list">
-          <li>25 HQ photos (≈2000–3000 px)</li>
-          <li>1 short clip (30–60 s, 1080p)</li>
-          <li>Private link (48h · 3 attempts) · AI-generated · 18+</li>
+          <li>25 fotos HQ (≈2000–3000 px)</li>
+          <li>1 clip corto (30–60 s, 1080p)</li>
+          <li>Enlace privado (48 h · 3 intentos) · IA · 18+</li>
         </ul>
       </div>
     </article>
@@ -127,16 +154,16 @@
     <!-- Deluxe -->
     <article class="card tilt" style="--card-image:url('/img/deluxe.jpg')">
       <div class="card-content">
-        <h2>Deluxe — $39</h2>
+        <h2>De lujo — $39</h2>
         <a class="btn"
            href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=39.00&currencyCode=840&customProductId=DELUXE_001">
-          Buy now
+          Comprar ahora
         </a>
-        <a href="#" class="info-toggle">Details</a>
+        <a href="#" class="info-toggle">Detalles</a>
         <ul class="mini-list">
-          <li>50 HQ photos (≈3000 px)</li>
-          <li>3 clips total 3–5 min (1080–1440p)</li>
-          <li>+5 wallpapers (bonus) · Private link 48h</li>
+          <li>50 fotos HQ (≈3000 px)</li>
+          <li>3 clips (3–5 min en total, 1080–1440p)</li>
+          <li>+5 wallpapers (bonus) · Enlace 48 h</li>
         </ul>
       </div>
     </article>
@@ -144,40 +171,38 @@
     <!-- Bundle -->
     <article class="card tilt" style="--card-image:url('/img/bundle.jpg')">
       <div class="card-content">
-        <h2>Bundle — $99</h2>
+        <h2>Paquete — $99</h2>
         <a class="btn"
            href="https://api.ccbill.com/wap-frontflex/flexforms/TU_FORM_ID?price=99.00&currencyCode=840&customProductId=BUNDLE_001">
-          Buy now
+          Comprar ahora
         </a>
-        <a href="#" class="info-toggle">Details</a>
+        <a href="#" class="info-toggle">Detalles</a>
         <ul class="mini-list">
-          <li>3 full collections (150+ HQ photos)</li>
-          <li>6–8 clips total 8–12 min (1080–1440p)</li>
-          <li>Extras: BTS + wallpapers · Best value</li>
+          <li>3 colecciones (150+ fotos HQ)</li>
+          <li>6–8 clips (8–12 min, 1080–1440p)</li>
+          <li>Extras: BTS + wallpapers · Mejor precio</li>
         </ul>
       </div>
     </article>
   </main>
 
-  <!-- Legal Disclaimer -->
+  <!-- Legal mínimo colapsable -->
   <section class="legal">
-    <h3>Disclaimer</h3>
-    <p>
-      All visuals on this website are <strong>100% AI-generated</strong> and depict fictional adults only.
-      No real persons are portrayed, and no explicit content is offered. Access is restricted to individuals aged 18 or older.
-      Download links are time-limited and intended for personal use. For support or inquiries, contact:
-      <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>.
-    </p>
+    <details>
+      <summary>Aviso legal</summary>
+      <p>
+        Todo el contenido visual de este sitio es <strong>100% generado por IA</strong> y representa únicamente adultos ficticios (18+).
+        No se ofrece material explícito. Acceso restringido a mayores de edad. Enlaces de descarga con tiempo limitado para uso personal.
+      </p>
+    </details>
   </section>
 
   <footer class="site-footer">
-    <small>© 2025 — AI-Only, SFW. All rights reserved.</small>
+    <small>© 2025 — IA (SFW). Todos los derechos reservados.</small>
   </footer>
 
-  <!-- Overlay -->
   <div class="page-overlay" aria-hidden="true"></div>
 
-  <!-- Scripts -->
   <script>
     // Age gate
     function enterSite(){
@@ -190,7 +215,7 @@
       }
     });
 
-    // Subtle 3D tilt (parallax) on cards
+    // Tilt 3D sutil en tarjetas
     const cards = document.querySelectorAll('.tilt');
     cards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
@@ -204,7 +229,7 @@
       card.addEventListener('mouseleave', () => { card.style.transform = ''; });
     });
 
-    // Details toggle for mobile/touch
+    // Toggle de “Detalles” para móvil/touch
     document.querySelectorAll('.info-toggle').forEach(link=>{
       link.addEventListener('click', (e)=>{
         e.preventDefault();
