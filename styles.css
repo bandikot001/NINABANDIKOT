@@ -230,3 +230,28 @@ body{
     background: linear-gradient(to top, rgba(0,0,0,.62) 0%, rgba(0,0,0,0) 65%);
   }
 }
+/* === Readability boost for details on hover (no layout change) === */
+.card:hover::after{
+  /* oscurece un poco más la franja inferior cuando hay hover */
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.84) 0%,
+    rgba(0,0,0,.28) 60%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+.card:hover .mini-list{
+  color: #ffffff;                      /* blanco pleno */
+  text-shadow: 0 1px 3px rgba(0,0,0,.85); /* halo oscuro para contraste */
+  background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: 8px 10px;                   /* compacto, no agranda el bloque */
+}
+
+.card:hover .card-content h2,
+.card:hover .info-toggle{
+  color: #fff;                         /* título y “Details” más legibles */
+  text-shadow: 0 1px 3px rgba(0,0,0,.85);
+}
