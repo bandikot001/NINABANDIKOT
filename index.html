@@ -1,193 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NINA BANDIKOT — Photo Packs</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NINA BANDIKOT — Photo Packs (SFW 18+)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #000;
-      color: #fff;
-      margin: 0;
-      padding: 0;
+    /* ===== LUXURY THEME: GOLD / BLACK / NEON ===== */
+    :root{
+      --bg-image: url("img/bg.jpg");   /* << Fondo correcto */
+      --overlay: rgba(0,0,0,.55);
+      --text: #ececec;
+      --muted: #b8c0cc;
+
+      --gold: #f5d36c;
+      --neon: #ff2bd1;
+      --btn-glow: rgba(255,43,209,.35);
+      --border: rgba(255,255,255,.12);
+      --panel: rgba(10,10,12,.65);
     }
 
-    header {
-      background: #111;
-      text-align: center;
-      padding: 1rem;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text);
+      background:#050507 var(--bg-image) center/cover fixed no-repeat;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
-    header h1 {
-      font-size: 2.2rem;
-      color: #ff1493; /* rosa neón */
-      margin: 0.2em 0 0.5em;
-      text-shadow: 0 0 8px #ff69b4, 0 0 15px #ff1493;
+    /* Advisory (sutil) */
+    .advisory{
+      position:sticky; top:0; z-index:100; width:100%;
+      display:flex; justify-content:center; gap:10px; align-items:center;
+      padding:6px 10px; font-size:12px; line-height:1.2; color:#e9e2cf;
+      background: rgba(8,8,10,.55);
+      border-bottom: 1px solid rgba(245,211,108,.25);
+      backdrop-filter: blur(6px);
     }
+    .advisory strong{ color:var(--gold); font-weight:800 }
 
-    header h2 {
-      font-size: 1.8rem;
-      color: #ff69b4;
-      margin: 0.2em 0;
+    /* Overlay general */
+    .page-overlay{position:fixed; inset:0; background:var(--overlay); pointer-events:none; z-index:0}
+
+    /* Age gate */
+    #age-gate{
+      position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.92);
+      display:flex; align-items:center; justify-content:center;
     }
-
-    header p {
-      font-size: 1rem;
-      color: #ddd;
-    }
-
-    .advisory {
-      background: #111;
-      color: #ffcc00;
-      text-align: center;
-      padding: 0.5em;
-      font-size: 0.9rem;
-      border-bottom: 1px solid #333;
-    }
-
-    main {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-    }
-
-    .card {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 0 12px rgba(0,0,0,0.6);
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-8px) scale(1.02);
-    }
-
-    .card-content {
-      background: rgba(0,0,0,0.65);
-      padding: 1rem;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      color: #fff;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .card:hover .card-content {
-      opacity: 1;
-    }
-
-    .btn-3d {
-      display: inline-block;
-      margin-top: 0.5rem;
-      padding: 0.6em 1.2em;
-      font-size: 1rem;
-      color: #000;
-      background: linear-gradient(145deg, #ffcc00, #ff9900);
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.5);
-      transition: all 0.2s ease-in-out;
-    }
-
-    .btn-3d:hover {
-      background: linear-gradient(145deg, #ffdd33, #ffaa00);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 12px rgba(0,0,0,0.6);
-    }
-
-    footer {
-      background: #111;
-      color: #888;
-      font-size: 0.75rem;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    footer a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 0.7rem;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    .legal {
-      font-size: 0.7rem;
-      color: #777;
-      margin-top: 0.5rem;
-    }
-  </style>
-</head>
-<body>
-  <div class="advisory">
-    Advisory: SFW, non-explicit previews. Adults 18+ only.
-  </div>
-
-  <header>
-    <h1>NINA BANDIKOT</h1>
-    <h2>Photo Packs (18+ • SFW)</h2>
-    <p>Non-explicit previews. Models depicted are adults only.</p>
-  </header>
-
-  <main>
-    <!-- Entry -->
-    <article class="card" style="background-image:url('entry.jpg')">
-      <div class="card-content">
-        <ul>
-          <li>25 HQ photos (≈2000–3000 px)</li>
-          <li>1 short clip (30–60 s, 1080p)</li>
-          <li>Private link 48h (3 attempts)</li>
-        </ul>
-      </div>
-      <h3 style="margin:1rem; color:#fff;">Entry — $15</h3>
-      <a class="btn-3d" href="#">Buy now</a>
-    </article>
-
-    <!-- Deluxe -->
-    <article class="card" style="background-image:url('deluxe.jpg')">
-      <div class="card-content">
-        <ul>
-          <li>50 HQ photos (≈3000 px)</li>
-          <li>3 clips total 3–5 min (1080–1440p)</li>
-          <li>+5 wallpapers (bonus)</li>
-          <li>Private link 48h</li>
-        </ul>
-      </div>
-      <h3 style="margin:1rem; color:#fff;">Deluxe — $39</h3>
-      <a class="btn-3d" href="#">Buy now</a>
-    </article>
-
-    <!-- Bundle -->
-    <article class="card" style="background-image:url('bundle.jpg')">
-      <div class="card-content">
-        <ul>
-          <li>3 full collections (150+ HQ photos)</li>
-          <li>6–8 clips total 8–12 min (1080–1440p)</li>
-          <li>Extras: BTS + wallpapers</li>
-          <li>Best value package</li>
-        </ul>
-      </div>
-      <h3 style="margin:1rem; color:#fff;">Bundle — $99</h3>
-      <a class="btn-3d" href="#">Buy now</a>
-    </article>
-  </main>
-
-  <footer>
-    <a href="#">Legal notice</a>
-    <div class="legal">© 2025 — SFW. All rights reserved.</div>
-  </footer>
-</body>
-</html>
+    .age-box{
+      background: linear-gradient(180deg, rgba(14,14
