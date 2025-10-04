@@ -3,364 +3,167 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NINA BANDIKOT — Photo Packs (SFW 18+)</title>
+  <title>NINA BANDIKOT — Photo Packs</title>
 
-  <!-- Premium fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== LUXURY THEME: GOLD / BLACK / NEON ===== */
     :root{
       --bg-image: url("img/bg.jpg");
-      --overlay: rgba(0,0,0,.55);
       --text: #ececec;
       --muted: #b8c0cc;
-
-      --gold: #f5d36c;      /* soft gold */
-      --gold-deep: #c8a63f; /* deeper gold */
-      --neon: #ff2bd1;      /* neon magenta */
-      --btn-glow: rgba(255,43,209,.35);
-      --border: rgba(255,255,255,.12);
+      --gold: #f5d36c;
+      --neon: #ff2bd1;
       --panel: rgba(10,10,12,.65);
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0; color:var(--text);
       background:#050507 var(--bg-image) center/cover fixed no-repeat;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: Inter, sans-serif;
     }
 
-    /* Subtle advisory */
+    /* advisory */
     .advisory{
-      position:sticky; top:0; z-index:100; width:100%;
-      display:flex; justify-content:center; gap:10px; align-items:center;
-      padding:6px 10px; font-size:12px; line-height:1.2; color:#e9e2cf;
-      background: rgba(8,8,10,.55);
-      border-bottom: 1px solid rgba(245,211,108,.25);
-      backdrop-filter: blur(6px);
+      position:sticky; top:0; z-index:10;
+      text-align:center; padding:5px;
+      font-size:12px; background:rgba(0,0,0,.6);
+      border-bottom:1px solid rgba(245,211,108,.3);
     }
-    .advisory strong{ color:var(--gold); font-weight:800 }
 
-    /* Global overlay for readability (over background only) */
-    .page-overlay{position:fixed; inset:0; background:var(--overlay); pointer-events:none; z-index:0}
-
-    /* AGE GATE */
-    #age-gate{
-      position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.92);
-      display:flex; align-items:center; justify-content:center;
-    }
-    .age-box{
-      background: linear-gradient(180deg, rgba(14,14,18,.9), rgba(14,14,18,.75));
-      color:var(--text); padding:26px; border-radius:18px;
-      width:min(92vw,440px); border:1px solid rgba(245,211,108,.25);
-      box-shadow: 0 30px 80px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.02) inset;
-      text-align:center; font-family: Outfit, Inter, sans-serif;
-    }
-    .age-box h2{ margin:0 0 10px; font-weight:800; letter-spacing:.2px }
-    .age-box p{ margin:0 0 16px; color:var(--muted) }
-    .age-actions{ display:flex; gap:10px; justify-content:center }
-
-    /* HEADER */
-    .site-header,.site-footer{ position:relative; z-index:1; text-align:center }
-    .site-header{ padding:34px 16px 6px }
-    .site-header .brand-neon{
-      margin:0 0 8px;
-      font: 800 30px/1 Outfit, Inter, sans-serif;
-      letter-spacing:.5px;
-      color:#ff2bd1;
-      text-shadow:
-        0 0 6px  #ff2bd1,
-        0 0 14px #ff2bd1,
-        0 0 28px #ff2bd1,
-        0 0 46px rgba(255,43,209,.55);
+    /* header */
+    .site-header{ text-align:center; padding:30px 10px 10px }
+    .brand-neon{
+      font: 800 32px Outfit, sans-serif;
+      color: var(--neon);
+      text-shadow: 0 0 6px #ff2bd1, 0 0 14px #ff2bd1, 0 0 28px #ff2bd1;
       animation: neonPulse 2.8s ease-in-out infinite alternate,
                  neonBlink 10s steps(1,end) infinite;
     }
     .site-header h1{
-      margin:0 0 6px; font-family:Outfit, Inter, sans-serif; font-weight:800;
-      letter-spacing:.3px; font-size:28px;
-      background: linear-gradient(90deg, var(--gold), var(--neon));
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin:5px 0; font:800 28px Outfit, sans-serif;
+      background:linear-gradient(90deg,var(--gold),var(--neon));
+      -webkit-background-clip:text; color:transparent;
     }
     .site-header p{ margin:0; color:var(--muted) }
 
-    /* Neon animations */
     @keyframes neonPulse{
-      0%{
-        opacity:.85;
-        text-shadow:
-          0 0 3px  #ff2bd1,
-          0 0 10px #ff2bd1,
-          0 0 16px #ff2bd1,
-          0 0 26px rgba(255,43,209,.45);
-      }
-      100%{
-        opacity:1;
-        text-shadow:
-          0 0 8px  #ff2bd1,
-          0 0 20px #ff2bd1,
-          0 0 40px #ff2bd1,
-          0 0 70px rgba(255,43,209,.75);
-      }
+      0%{opacity:.85;text-shadow:0 0 4px #ff2bd1,0 0 10px #ff2bd1;}
+      100%{opacity:1;text-shadow:0 0 10px #ff2bd1,0 0 30px #ff2bd1;}
     }
     @keyframes neonBlink{
-      0%, 89%, 92%, 100% { filter:none; }
-      90% { opacity:.6; }
-      93% { opacity:.9; }
+      0%,89%,92%,100%{opacity:1}
+      90%{opacity:.6}
+      93%{opacity:.9}
     }
 
-    /* GRID */
+    /* grid */
     .grid{
-      display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      gap:26px; padding:26px; width:min(1120px, 92%); margin:0 auto;
-      position:relative; z-index:1;
+      display:grid; gap:20px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      width:min(1100px,95%); margin:20px auto;
     }
-
-    /* CARDS */
     .card{
-      position:relative; overflow:hidden;
-      border-radius:20px; border:1px solid var(--border);
-      min-height:300px; display:flex; align-items:flex-end;
-      background:#0f1115;
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-      will-change: transform;
-      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      position:relative; border-radius:15px;
+      overflow:hidden; min-height:300px;
+      background:#111; color:#fff;
+      transition:transform .2s;
     }
+    .card:hover{ transform:scale(1.02) }
     .card::before{
       content:""; position:absolute; inset:0;
-      background-image: var(--card-image, none);
-      background-size: cover; background-position: center;
-    }
-    .card::after{
-      content:""; position:absolute; left:0; right:0; bottom:0; height:60%;
-      background: linear-gradient(to top, rgba(0,0,0,.70) 0%, rgba(0,0,0,0) 100%);
-      transition: background .18s ease;
+      background-size:cover; background-position:center;
+      filter:brightness(.7);
     }
     .card-content{
-      position:absolute; left:0; right:0; bottom:0;
-      padding: 14px 16px;
+      position:absolute; bottom:0; left:0; right:0;
+      padding:15px; background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
     }
-    .card-content h2{
-      margin:0 0 8px; font-size:19px; font-weight:800;
-      font-family:Outfit, Inter, sans-serif;
-      text-shadow: 0 2px 10px rgba(0,0,0,.55);
-      transition: color .18s ease, text-shadow .18s ease;
-    }
+    .card h2{margin:0 0 8px;font:800 20px Outfit,sans-serif}
+    .mini-list{display:none;font-size:13px;color:#ddd;margin:10px 0 0;padding-left:16px}
+    .card:hover .mini-list{display:block}
 
-    .mini-list{
-      display:none; margin:8px 0 10px; padding-left:16px;
-      line-height:1.28; font-size:13px; color:var(--muted);
-      transition: color .18s ease, background .18s ease, text-shadow .18s ease;
-    }
-    .card:hover .mini-list, .card.open .mini-list{ display:block }
-
-    /* Button glass + ring */
     .btn{
-      --ring: linear-gradient(90deg, var(--gold), var(--neon));
-      position:relative; display:inline-flex; align-items:center; justify-content:center;
-      padding: 11px 16px; font-weight:800; letter-spacing:.25px;
-      color:#0b0b0e; text-decoration:none; cursor:pointer;
-      border-radius:12px; border:1px solid rgba(255,255,255,.10);
-      background: rgba(245,211,108,.22);
-      backdrop-filter: blur(10px);
-      box-shadow:
-        0 12px 26px var(--btn-glow),
-        0 8px 22px rgba(0,0,0,.35),
-        inset 0 0 0 1px rgba(255,255,255,.06);
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      display:inline-block;padding:8px 14px;margin-top:8px;
+      border-radius:8px;font-weight:700;text-decoration:none;
+      background:rgba(245,211,108,.3);color:#000;
+      backdrop-filter:blur(6px);
+      transition:.2s;
     }
-    .btn::before{
-      content:""; position:absolute; inset:-1px; z-index:-1; border-radius:inherit;
-      padding:1px; background: var(--ring);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-    }
-    .btn:hover{
-      transform: translateY(-3px) scale(1.02);
-      box-shadow:
-        0 20px 46px rgba(255,43,209,.45),
-        0 10px 30px rgba(0,0,0,.4),
-        inset 0 0 0 1px rgba(255,255,255,.12);
-    }
-    .btn:active{ transform: translateY(-1px) scale(.99) }
-    .btn.btn-outline{ background: transparent; color: var(--text); }
-    .btn.btn-outline:hover{ background: rgba(255,255,255,.06) }
-    .info-toggle{
-      margin-left:10px; font-size:12px; color:#d7deea; text-decoration:underline;
-    }
+    .btn:hover{background:var(--gold);}
 
-    /* Readability boost when hovering */
-    .card:hover::after{
-      background: linear-gradient(
-        to top,
-        rgba(0,0,0,.84) 0%,
-        rgba(0,0,0,.28) 60%,
-        rgba(0,0,0,0) 100%
-      );
-    }
-    .card:hover .mini-list{
-      color:#fff;
-      text-shadow:0 1px 3px rgba(0,0,0,.85);
-      background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:10px;
-      padding:8px 10px;
-    }
-    .card:hover .card-content h2,
-    .card:hover .info-toggle{
-      color:#fff;
-      text-shadow:0 1px 3px rgba(0,0,0,.85);
-    }
-
-    /* Minimal legal (collapsible) */
+    /* legal */
     .legal{
-      position:relative; z-index:1; width:min(1120px, 92%);
-      margin:10px auto 24px; background: var(--panel);
-      border: 1px solid rgba(245,211,108,.15); border-radius: 12px;
-      padding: 6px 10px;
+      width:min(1100px,95%); margin:20px auto;
+      font-size:11px; color:#aaa;
     }
-    .legal details{ font-size:11.5px; line-height:1.35; color:#aeb8c8 }
-    .legal summary{
-      list-style:none; cursor:pointer; font-weight:700; color:#f0e7c4; font-size:12px;
-    }
-    .legal summary::-webkit-details-marker{ display:none }
-    .legal details[open] summary{ opacity:.95; margin-bottom:4px }
+    .legal summary{cursor:pointer;color:var(--gold)}
 
-    .site-footer{
-      padding:8px 16px 26px; color:#a9b3c5; font-size:12px; text-align:center;
-    }
-
-    @media (max-width: 640px){
-      .card::after{ height:68%; }
-    }
+    footer{ text-align:center; font-size:12px; padding:15px; color:#888 }
   </style>
 </head>
 <body>
 
-  <!-- Advisory -->
-  <div class="advisory">
-    <strong>Advisory:</strong> SFW, non-explicit previews. Adults 18+ only.
-  </div>
+  <div class="advisory"><strong>Advisory:</strong> Non-explicit previews. Adults 18+ only.</div>
 
-  <!-- AGE GATE -->
-  <div id="age-gate">
-    <div class="age-box">
-      <h2>Are you 18 or older?</h2>
-      <p>This website features SFW (non-explicit) adult-themed previews. Access is restricted to adults.</p>
-      <div class="age-actions">
-        <button class="btn" onclick="enterSite()">Yes, I’m 18+</button>
-        <a class="btn btn-outline" href="https://www.google.com">No, leave</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- HEADER -->
   <header class="site-header">
     <div class="brand-neon">NINA BANDIKOT</div>
-    <h1>Photo Packs (18+ · SFW)</h1>
-    <p>Non-explicit previews. Models depicted are adults only.</p>
+    <h1>Photo Packs</h1>
+    <p>Exclusive collections · Adults only (SFW previews)</p>
   </header>
 
-  <!-- GRID -->
   <main class="grid">
-    <!-- Entry -->
-    <article class="card tilt" style="--card-image:url('img/entry.jpg')">
+    <article class="card" style="--bg:url('img/entry.jpg')">
       <div class="card-content">
         <h2>Entry — $15</h2>
         <a class="btn" href="#">Buy now</a>
-        <a href="#" class="info-toggle">Details</a>
         <ul class="mini-list">
-          <li>25 HQ photos (≈2000–3000 px)</li>
-          <li>1 short clip (30–60 s, 1080p)</li>
-          <li>Private link (48h · 3 attempts)</li>
+          <li>25 HQ photos</li>
+          <li>1 short clip</li>
         </ul>
       </div>
     </article>
 
-    <!-- Deluxe -->
-    <article class="card tilt" style="--card-image:url('img/deluxe.jpg')">
+    <article class="card" style="--bg:url('img/deluxe.jpg')">
       <div class="card-content">
         <h2>Deluxe — $39</h2>
         <a class="btn" href="#">Buy now</a>
-        <a href="#" class="info-toggle">Details</a>
         <ul class="mini-list">
-          <li>50 HQ photos (≈3000 px)</li>
-          <li>3 clips total 3–5 min (1080–1440p)</li>
-          <li>+5 wallpapers (bonus) · Private link 48h</li>
+          <li>50 HQ photos</li>
+          <li>3 video clips</li>
         </ul>
       </div>
     </article>
 
-    <!-- Bundle -->
-    <article class="card tilt" style="--card-image:url('img/bundle.jpg')">
+    <article class="card" style="--bg:url('img/bundle.jpg')">
       <div class="card-content">
         <h2>Bundle — $99</h2>
         <a class="btn" href="#">Buy now</a>
-        <a href="#" class="info-toggle">Details</a>
         <ul class="mini-list">
-          <li>3 full collections (150+ HQ photos)</li>
-          <li>6–8 clips total 8–12 min (1080–1440p)</li>
-          <li>Extras: BTS + wallpapers · Best value</li>
+          <li>150+ photos</li>
+          <li>8–12 min video total</li>
         </ul>
       </div>
     </article>
   </main>
 
-  <!-- Minimal legal -->
   <section class="legal">
     <details>
       <summary>Legal notice</summary>
-      <p>
-        Non-explicit previews. Access restricted to adults (18+). No explicit content is offered.
-        Download links (if provided) are time-limited for personal use only.
-      </p>
+      <p>Access restricted to 18+. Non-explicit previews only. Download links are personal and time-limited.</p>
     </details>
   </section>
 
-  <footer class="site-footer">
-    <small>© 2025 — SFW. All rights reserved.</small>
-  </footer>
+  <footer>© 2025 — All rights reserved.</footer>
 
-  <!-- Overlay over background -->
-  <div class="page-overlay" aria-hidden="true"></div>
-
-  <!-- Scripts -->
   <script>
-    // Age gate
-    function enterSite(){
-      document.getElementById('age-gate').style.display = 'none';
-      localStorage.setItem('ageConfirmed','true');
-    }
-    window.addEventListener('load', () => {
-      if(localStorage.getItem('ageConfirmed') === 'true'){
-        document.getElementById('age-gate').style.display = 'none';
-      }
-    });
-
-    // Subtle 3D tilt on cards
-    const cards = document.querySelectorAll('.tilt');
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        const x = e.clientX - r.left;
-        const y = e.clientY - r.top;
-        const rotY = ((x / r.width) - 0.5) * 8;
-        const rotX = -((y / r.height) - 0.5) * 8;
-        card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-      });
-      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-    });
-
-    // Details toggle for touch/mobile
-    document.querySelectorAll('.info-toggle').forEach(link=>{
-      link.addEventListener('click', (e)=>{
-        e.preventDefault();
-        const card = link.closest('.card');
-        card.classList.toggle('open');
-      });
+    // insert background correctly
+    document.querySelectorAll('.card').forEach(c=>{
+      const bg=c.getAttribute('style').match(/url\('(.*)'\)/)[1];
+      c.style.setProperty('--bg',`url(${bg})`);
+      c.style.setProperty('background-image',`var(--bg)`);
     });
   </script>
 </body>
