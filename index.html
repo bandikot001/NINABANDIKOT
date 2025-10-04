@@ -1,170 +1,110 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NINA BANDIKOT — Photo Packs</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NINA BANDIKOT</title>
   <style>
-    :root{
-      --bg-image: url("img/bg.jpg");
-      --text: #ececec;
-      --muted: #b8c0cc;
-      --gold: #f5d36c;
-      --neon: #ff2bd1;
-      --panel: rgba(10,10,12,.65);
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
     }
 
-    *{box-sizing:border-box}
-    body{
-      margin:0; color:var(--text);
-      background:#050507 var(--bg-image) center/cover fixed no-repeat;
-      font-family: Inter, sans-serif;
+    header {
+      padding: 40px 20px;
+      background: linear-gradient(90deg, #ff3cac, #784ba0, #2b86c5);
+      color: #fff;
     }
 
-    /* advisory */
-    .advisory{
-      position:sticky; top:0; z-index:10;
-      text-align:center; padding:5px;
-      font-size:12px; background:rgba(0,0,0,.6);
-      border-bottom:1px solid rgba(245,211,108,.3);
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      text-shadow: 0 0 15px #ff3cac, 0 0 25px #2b86c5;
     }
 
-    /* header */
-    .site-header{ text-align:center; padding:30px 10px 10px }
-    .brand-neon{
-      font: 800 32px Outfit, sans-serif;
-      color: var(--neon);
-      text-shadow: 0 0 6px #ff2bd1, 0 0 14px #ff2bd1, 0 0 28px #ff2bd1;
-      animation: neonPulse 2.8s ease-in-out infinite alternate,
-                 neonBlink 10s steps(1,end) infinite;
-    }
-    .site-header h1{
-      margin:5px 0; font:800 28px Outfit, sans-serif;
-      background:linear-gradient(90deg,var(--gold),var(--neon));
-      -webkit-background-clip:text; color:transparent;
-    }
-    .site-header p{ margin:0; color:var(--muted) }
-
-    @keyframes neonPulse{
-      0%{opacity:.85;text-shadow:0 0 4px #ff2bd1,0 0 10px #ff2bd1;}
-      100%{opacity:1;text-shadow:0 0 10px #ff2bd1,0 0 30px #ff2bd1;}
-    }
-    @keyframes neonBlink{
-      0%,89%,92%,100%{opacity:1}
-      90%{opacity:.6}
-      93%{opacity:.9}
+    main {
+      padding: 40px 20px;
     }
 
-    /* grid */
-    .grid{
-      display:grid; gap:20px;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      width:min(1100px,95%); margin:20px auto;
+    /* Carrusel de videos */
+    .video-carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #111;
+      padding: 40px 0;
     }
-    .card{
-      position:relative; border-radius:15px;
-      overflow:hidden; min-height:300px;
-      background:#111; color:#fff;
-      transition:transform .2s;
-    }
-    .card:hover{ transform:scale(1.02) }
-    .card::before{
-      content:""; position:absolute; inset:0;
-      background-size:cover; background-position:center;
-      filter:brightness(.7);
-    }
-    .card-content{
-      position:absolute; bottom:0; left:0; right:0;
-      padding:15px; background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
-    }
-    .card h2{margin:0 0 8px;font:800 20px Outfit,sans-serif}
-    .mini-list{display:none;font-size:13px;color:#ddd;margin:10px 0 0;padding-left:16px}
-    .card:hover .mini-list{display:block}
 
-    .btn{
-      display:inline-block;padding:8px 14px;margin-top:8px;
-      border-radius:8px;font-weight:700;text-decoration:none;
-      background:rgba(245,211,108,.3);color:#000;
-      backdrop-filter:blur(6px);
-      transition:.2s;
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      animation: scroll 40s linear infinite;
+      width: max-content;
     }
-    .btn:hover{background:var(--gold);}
 
-    /* legal */
-    .legal{
-      width:min(1100px,95%); margin:20px auto;
-      font-size:11px; color:#aaa;
+    .carousel-item {
+      flex: 0 0 auto;
+      width: 250px;
+      height: 250px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
     }
-    .legal summary{cursor:pointer;color:var(--gold)}
 
-    footer{ text-align:center; font-size:12px; padding:15px; color:#888 }
+    .carousel-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    footer {
+      padding: 20px;
+      background: #000;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
-
-  <div class="advisory"><strong>Advisory:</strong> Non-explicit previews. Adults 18+ only.</div>
-
-  <header class="site-header">
-    <div class="brand-neon">NINA BANDIKOT</div>
-    <h1>Photo Packs</h1>
-    <p>Exclusive collections · Adults only (SFW previews)</p>
+  <header>
+    <h1>NINA BANDIKOT</h1>
   </header>
 
-  <main class="grid">
-    <article class="card" style="--bg:url('img/entry.jpg')">
-      <div class="card-content">
-        <h2>Entry — $15</h2>
-        <a class="btn" href="#">Buy now</a>
-        <ul class="mini-list">
-          <li>25 HQ photos</li>
-          <li>1 short clip</li>
-        </ul>
-      </div>
-    </article>
-
-    <article class="card" style="--bg:url('img/deluxe.jpg')">
-      <div class="card-content">
-        <h2>Deluxe — $39</h2>
-        <a class="btn" href="#">Buy now</a>
-        <ul class="mini-list">
-          <li>50 HQ photos</li>
-          <li>3 video clips</li>
-        </ul>
-      </div>
-    </article>
-
-    <article class="card" style="--bg:url('img/bundle.jpg')">
-      <div class="card-content">
-        <h2>Bundle — $99</h2>
-        <a class="btn" href="#">Buy now</a>
-        <ul class="mini-list">
-          <li>150+ photos</li>
-          <li>8–12 min video total</li>
-        </ul>
-      </div>
-    </article>
+  <main>
+    <h2>Bienvenidos</h2>
+    <p>Explora el contenido exclusivo de Nina Bandikot.</p>
   </main>
 
-  <section class="legal">
-    <details>
-      <summary>Legal notice</summary>
-      <p>Access restricted to 18+. Non-explicit previews only. Download links are personal and time-limited.</p>
-    </details>
+  <!-- Carrusel de videos -->
+  <section class="video-carousel">
+    <div class="carousel-track">
+      <div class="carousel-item"><video src="videos/video1.mp4" autoplay loop muted playsinline></video></div>
+      <div class="carousel-item"><video src="videos/video2.mp4" autoplay loop muted playsinline></video></div>
+      <div class="carousel-item"><video src="videos/video3.mp4" autoplay loop muted playsinline></video></div>
+      <div class="carousel-item"><video src="videos/video4.mp4" autoplay loop muted playsinline></video></div>
+      <div class="carousel-item"><video src="videos/video5.mp4" autoplay loop muted playsinline></video></div>
+
+      <!-- Duplicado para loop continuo -->
+      <div class="carousel-item"><video src="videos/video1.mp4" autoplay loop muted playsinline></video></div>
+      <div class="carousel-item"><video src="videos/video2.mp4" autoplay loop muted playsinline></video></div>
+      <div class="carousel-item"><video src="videos/video3.mp4" autoplay loop muted playsinline></video></div>
+      <div class="carousel-item"><video src="videos/video4.mp4" autoplay loop muted playsinline></video></div>
+      <div class="carousel-item"><video src="videos/video5.mp4" autoplay loop muted playsinline></video></div>
+    </div>
   </section>
 
-  <footer>© 2025 — All rights reserved.</footer>
-
-  <script>
-    // insert background correctly
-    document.querySelectorAll('.card').forEach(c=>{
-      const bg=c.getAttribute('style').match(/url\('(.*)'\)/)[1];
-      c.style.setProperty('--bg',`url(${bg})`);
-      c.style.setProperty('background-image',`var(--bg)`);
-    });
-  </script>
+  <footer>
+    © 2025 NINA BANDIKOT. Todos los derechos reservados.
+  </footer>
 </body>
 </html>
