@@ -15,14 +15,28 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;text-align:center}
+    body{
+      margin:0; color:var(--text); font-family:Arial,Helvetica,sans-serif; text-align:center;
+      background: none;                /* el fondo real lo ponemos fijo detrás */
+    }
 
-    /* Header con bg opcional */
+    /* ===== Fondo fijo a pantalla completa ===== */
+    .site-bg{ 
+      position: fixed; inset: 0; z-index: -2;
+      background: url("img/bg.jpg") center/cover no-repeat fixed; /* fijo y cubre todo */
+    }
+    /* Oscurecemos un poco para legibilidad del contenido */
+    .site-bg::after{
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(120% 90% at 50% 30%, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.85) 100%);
+    }
+
+    /* ===== Encabezado con efecto neón ===== */
     header{
       padding:40px 20px;
-      background: linear-gradient(90deg,var(--brand1),var(--brand2) 40%,var(--brand3)),
-                  url("img/bg.jpg") center/cover no-repeat;
-      background-blend-mode: overlay;
+      /* capa suave de color por encima del fondo fijo */
+      background: linear-gradient(90deg, #00000077 0%, #00000033 100%);
+      backdrop-filter: blur(2px);
     }
     .brand{
       margin:0; text-transform:uppercase; letter-spacing:.15em;
@@ -33,9 +47,9 @@
         0 0 36px rgba(255,79,207,.45);
     }
 
-    .intro{padding:28px 20px 8px; opacity:.9}
+    .intro{padding:28px 20px 8px; opacity:.95; text-shadow:0 2px 10px #000}
 
-    /* Grid de 3 tarjetas */
+    /* ===== Grid de 3 tarjetas ===== */
     .packs{
       max-width:1200px; margin:0 auto; padding:24px 16px 8px;
       display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
@@ -45,7 +59,7 @@
 
     .card{
       background:#111; border-radius:var(--radius); overflow:hidden;
-      box-shadow:0 10px 28px rgba(0,0,0,.45);
+      box-shadow:0 10px 28px rgba(0,0,0,.55);
     }
     .card figure{margin:0; line-height:0; background:#000}
     .card img{
@@ -60,22 +74,38 @@
       text-align:left; font-weight:700; letter-spacing:.02em;
       background:linear-gradient(90deg,var(--brand1),var(--brand3));
       -webkit-background-clip:text; background-clip:text; color:transparent;
+      font-size:clamp(14px, 1.8vw, 16px);
     }
+
+    /* ===== Botón ajustado para no cortarse ===== */
     .btn-buy{
-      border:0; border-radius:12px; padding:12px 14px; cursor:pointer;
-      color:#000; font-weight:800; letter-spacing:.02em;
+      display:inline-block; text-decoration:none; text-align:center;
+      border:0; border-radius:12px; padding:10px 12px; cursor:pointer;
+      color:#000; font-weight:800; letter-spacing:.01em;
+      font-size: clamp(12px, 1.6vw, 14px);   /* ↓ más pequeño y responsivo */
+      line-height:1.2;                       /* compacta líneas */
+      max-width: 100%;                       /* nunca se sale del contenedor */
+      white-space: normal;                   /* permite múltiples líneas */
       background:linear-gradient(90deg,#ffd54a,#ffbf00);
       box-shadow:0 6px 18px rgba(0,0,0,.35);
-      transition:.15s transform ease, .15s filter ease;
-      white-space:nowrap; text-decoration:none;
+      padding-block: 10px;
+      padding-inline: 12px;
     }
     .btn-buy:hover{ transform:translateY(-1px); filter:brightness(1.05); }
     .btn-buy:active{ transform:translateY(0); }
 
-    /* Carrusel de videos (abajo) */
+    /* En pantallas pequeñas, apila título y botón para más espacio */
+    @media (max-width: 720px){
+      .card .meta{ flex-direction:column; align-items:stretch; }
+      .btn-buy{ width:100%; }
+    }
+
+    /* ===== Carrusel de videos (abajo) ===== */
     .video-carousel{
-      position:relative; width:100%; overflow:hidden; background:var(--panel);
+      position:relative; width:100%; overflow:hidden;
+      background: #0b0b0fb0;            /* semitransparente sobre el fondo fijo */
       padding:28px 0; margin-top:28px;
+      backdrop-filter: blur(2px);
     }
     .carousel-track{
       display:inline-flex; gap:var(--gap); padding:0 var(--tile);
@@ -84,7 +114,7 @@
     .carousel-item{
       flex:0 0 auto; width:var(--tile); height:var(--tile);
       border-radius:16px; overflow:hidden; background:#111;
-      box-shadow:0 8px 24px rgba(0,0,0,.45);
+      box-shadow:0 8px 24px rgba(0,0,0,.55);
     }
     .carousel-item video{ width:100%; height:100%; object-fit:cover; display:block; }
     @keyframes slide{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
@@ -94,22 +124,23 @@
     .fade-sides::before{ left:0;  background:linear-gradient(90deg,var(--panel),transparent) }
     .fade-sides::after { right:0; background:linear-gradient(270deg,var(--panel),transparent) }
 
-    footer{padding:18px 12px 28px; font-size:.9rem; opacity:.7}
+    footer{padding:18px 12px 28px; font-size:.9rem; opacity:.85; text-shadow:0 2px 10px #000}
   </style>
 </head>
 <body>
+  <!-- Fondo fijo detrás de todo -->
+  <div class="site-bg" aria-hidden="true"></div>
+
   <header>
     <h1 class="brand">NINA BANDIKOT</h1>
   </header>
 
   <p class="intro">Photo Packs (18+ • SFW previews)</p>
 
-  <!-- ===== Tres imágenes estáticas con botón ===== -->
+  <!-- Tres imágenes con botón -->
   <section class="packs" aria-label="Paquetes de fotos">
     <article class="card">
-      <figure>
-        <img src="img/entry.jpg" alt="Entry Pack — vista previa no explícita">
-      </figure>
+      <figure><img src="img/entry.jpg" alt="Entry Pack — vista previa no explícita"></figure>
       <div class="meta">
         <div class="title">Entry Pack</div>
         <a class="btn-buy" href="#" rel="noopener">Comprar paquete de fotos sin censura ahora</a>
@@ -117,9 +148,7 @@
     </article>
 
     <article class="card">
-      <figure>
-        <img src="img/deluxe.jpg" alt="Deluxe Pack — vista previa no explícita">
-      </figure>
+      <figure><img src="img/deluxe.jpg" alt="Deluxe Pack — vista previa no explícita"></figure>
       <div class="meta">
         <div class="title">Deluxe Pack</div>
         <a class="btn-buy" href="#" rel="noopener">Comprar paquete de fotos sin censura ahora</a>
@@ -127,9 +156,7 @@
     </article>
 
     <article class="card">
-      <figure>
-        <img src="img/bundle.jpg" alt="Bundle — vista previa no explícita">
-      </figure>
+      <figure><img src="img/bundle.jpg" alt="Bundle — vista previa no explícita"></figure>
       <div class="meta">
         <div class="title">Bundle</div>
         <a class="btn-buy" href="#" rel="noopener">Comprar paquete de fotos sin censura ahora</a>
@@ -137,7 +164,7 @@
     </article>
   </section>
 
-  <!-- ===== Carrusel de videos abajo ===== -->
+  <!-- Carrusel de videos abajo -->
   <section class="video-carousel" aria-label="Carrusel de videos">
     <div class="carousel-track" id="carouselTrack"></div>
     <div class="fade-sides" aria-hidden="true"></div>
@@ -183,6 +210,7 @@
 
     build();
 
+    // Garantizar reproducción si el navegador bloquea autoplay
     window.addEventListener('pointerdown', () => {
       document.querySelectorAll('.video-carousel video').forEach(v => v.play().catch(()=>{}));
     }, { once:true });
