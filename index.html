@@ -5,126 +5,147 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NINA BANDIKOT</title>
   <meta name="color-scheme" content="dark light" />
+  <meta name="description" content="Nina Bandikot — Photo Packs (SFW previews). Neon + piel + actitud." />
   <style>
     :root{
       --bg:#000; --panel:#0b0b0f; --text:#fff;
       --brand1:#ff3cac; --brand2:#784ba0; --brand3:#2b86c5;
-      --neon:#ff4fcf;
-      --radius:18px;
+      --neon:#ff4fcf; --gold1:#ffd54a; --gold2:#ffbf00;
+      --radius:18px; --shadow:0 12px 32px rgba(0,0,0,.45);
       --tile:240px; --gap:20px; --speed:40s;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; color:var(--text); font-family:Arial,Helvetica,sans-serif; text-align:center;
-      background: none;                /* el fondo real lo ponemos fijo detrás */
+      margin:0; color:var(--text); font-family:Inter, Arial, Helvetica, sans-serif;
+      text-align:center; background:none; overflow-x:hidden;
     }
 
-    /* ===== Fondo fijo a pantalla completa ===== */
-    .site-bg{ 
-      position: fixed; inset: 0; z-index: -2;
-      background: url("img/bg.jpg") center/cover no-repeat fixed; /* fijo y cubre todo */
+    /* ===== Fondo fijo gigante ===== */
+    .site-bg{ position:fixed; inset:0; z-index:-2;
+      background:url("img/bg.jpg") center/cover no-repeat fixed;
     }
-    /* Oscurecemos un poco para legibilidad del contenido */
-    .site-bg::after{
-      content:""; position:absolute; inset:0;
-      background: radial-gradient(120% 90% at 50% 30%, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.85) 100%);
+    .site-bg::after{ content:""; position:absolute; inset:0;
+      background: radial-gradient(120% 90% at 50% 30%, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.9) 100%);
     }
 
-    /* ===== Encabezado con efecto neón ===== */
-    header{
-      padding:40px 20px;
-      /* capa suave de color por encima del fondo fijo */
-      background: linear-gradient(90deg, #00000077 0%, #00000033 100%);
-      backdrop-filter: blur(2px);
-    }
+    /* ===== Header neon ===== */
+    header{ padding:46px 20px 36px; background:transparent; }
     .brand{
       margin:0; text-transform:uppercase; letter-spacing:.15em;
-      font-size:clamp(34px,7vw,72px); color:#fff;
+      font-size: clamp(34px, 8vw, 92px);
+      color:#fff;
       text-shadow:
         0 0 6px rgba(255,79,207,.9),
-        0 0 18px rgba(255,79,207,.7),
-        0 0 36px rgba(255,79,207,.45);
+        0 0 20px rgba(255,79,207,.75),
+        0 0 42px rgba(255,79,207,.5);
+      animation: neonFlicker 6s ease-in-out infinite;
+      will-change: filter, opacity;
+    }
+    @keyframes neonFlicker{
+      0%, 97%, 100% { filter: drop-shadow(0 0 22px rgba(255,79,207,.6)); opacity:1; }
+      11%{ opacity:.94 }
+      12%{ opacity:.6 }
+      13%{ opacity:1 }
+      66%{ opacity:.96 }
+      67%{ opacity:.7 }
+      68%{ opacity:1 }
     }
 
-    .intro{padding:28px 20px 8px; opacity:.95; text-shadow:0 2px 10px #000}
+    .tagline{ margin:6px 0 22px; opacity:.92; text-shadow:0 2px 12px #000 }
 
     /* ===== Grid de 3 tarjetas ===== */
     .packs{
-      max-width:1200px; margin:0 auto; padding:24px 16px 8px;
+      max-width:1200px; margin:0 auto; padding:10px 16px 8px;
       display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
     }
-    @media (max-width:900px){ .packs{grid-template-columns:1fr 1fr} }
-    @media (max-width:580px){ .packs{grid-template-columns:1fr} }
+    @media (max-width:980px){ .packs{ grid-template-columns:1fr 1fr } }
+    @media (max-width:620px){ .packs{ grid-template-columns:1fr } }
 
     .card{
-      background:#111; border-radius:var(--radius); overflow:hidden;
-      box-shadow:0 10px 28px rgba(0,0,0,.55);
+      background: #111a;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(2px);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
-    .card figure{margin:0; line-height:0; background:#000}
-    .card img{
-      width:100%; height:100%; object-fit:cover; display:block;
-      aspect-ratio: 4 / 3;
-    }
-    .card .meta{
+    .card:hover{ transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,.55); }
+
+    .card figure{ margin:0; line-height:0; background:#000 }
+    .card img{ width:100%; height:100%; object-fit:cover; display:block; aspect-ratio: 4 / 3; }
+
+    .meta{
       padding:14px; display:flex; gap:12px; align-items:center; justify-content:space-between;
-      background:linear-gradient(0deg, #0b0b0f 0%, #111 100%);
+      background: linear-gradient(0deg, #0b0b0feb 0%, #111 100%);
     }
-    .card .title{
-      text-align:left; font-weight:700; letter-spacing:.02em;
+    .title{
+      text-align:left; font-weight:800; letter-spacing:.02em;
       background:linear-gradient(90deg,var(--brand1),var(--brand3));
       -webkit-background-clip:text; background-clip:text; color:transparent;
       font-size:clamp(14px, 1.8vw, 16px);
     }
 
-    /* ===== Botón ajustado para no cortarse ===== */
+    /* Botón Telegram — compacto y multilinea */
     .btn-buy{
       display:inline-block; text-decoration:none; text-align:center;
-      border:0; border-radius:12px; padding:10px 12px; cursor:pointer;
-      color:#000; font-weight:800; letter-spacing:.01em;
-      font-size: clamp(12px, 1.6vw, 14px);   /* ↓ más pequeño y responsivo */
-      line-height:1.2;                       /* compacta líneas */
-      max-width: 100%;                       /* nunca se sale del contenedor */
-      white-space: normal;                   /* permite múltiples líneas */
-      background:linear-gradient(90deg,#ffd54a,#ffbf00);
-      box-shadow:0 6px 18px rgba(0,0,0,.35);
-      padding-block: 10px;
-      padding-inline: 12px;
+      border:0; border-radius:12px; cursor:pointer;
+      color:#000; font-weight:900; letter-spacing:.01em;
+      font-size: clamp(12px, 1.6vw, 14px);
+      line-height:1.25; max-width: 100%; white-space: normal;
+      background: linear-gradient(90deg,var(--gold1),var(--gold2));
+      padding:10px 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+      transition: transform .15s ease, filter .15s ease;
     }
-    .btn-buy:hover{ transform:translateY(-1px); filter:brightness(1.05); }
-    .btn-buy:active{ transform:translateY(0); }
+    .btn-buy:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+    .btn-buy:active{ transform: translateY(0); }
 
-    /* En pantallas pequeñas, apila título y botón para más espacio */
-    @media (max-width: 720px){
-      .card .meta{ flex-direction:column; align-items:stretch; }
-      .btn-buy{ width:100%; }
-    }
-
-    /* ===== Carrusel de videos (abajo) ===== */
+    /* ===== Carrusel de videos ===== */
     .video-carousel{
       position:relative; width:100%; overflow:hidden;
-      background: #0b0b0fb0;            /* semitransparente sobre el fondo fijo */
-      padding:28px 0; margin-top:28px;
+      background: #0b0b0fb0; padding:28px 0; margin:34px 0 0;
       backdrop-filter: blur(2px);
     }
     .carousel-track{
       display:inline-flex; gap:var(--gap); padding:0 var(--tile);
-      animation:slide var(--speed) linear infinite; will-change:transform;
+      animation: slide var(--speed) linear infinite; will-change: transform;
     }
     .carousel-item{
       flex:0 0 auto; width:var(--tile); height:var(--tile);
       border-radius:16px; overflow:hidden; background:#111;
-      box-shadow:0 8px 24px rgba(0,0,0,.55);
+      box-shadow: var(--shadow);
     }
     .carousel-item video{ width:100%; height:100%; object-fit:cover; display:block; }
-    @keyframes slide{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    @keyframes slide{ from{ transform:translateX(0) } to{ transform:translateX(-50%) } }
+
     .fade-sides::before, .fade-sides::after{
       content:""; position:absolute; top:0; bottom:0; width:var(--tile); pointer-events:none; z-index:2;
     }
     .fade-sides::before{ left:0;  background:linear-gradient(90deg,var(--panel),transparent) }
     .fade-sides::after { right:0; background:linear-gradient(270deg,var(--panel),transparent) }
 
-    footer{padding:18px 12px 28px; font-size:.9rem; opacity:.85; text-shadow:0 2px 10px #000}
+    /* ===== CTA flotante a Telegram ===== */
+    .floating-telegram{
+      position: fixed; right:18px; bottom:18px; z-index:20;
+      display:flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:999px; text-decoration:none;
+      background:#1c9bef; color:#fff; font-weight:800;
+      box-shadow: 0 10px 24px rgba(0,0,0,.4);
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .floating-telegram:hover{ transform: translateY(-2px); filter: brightness(1.08); }
+    .floating-telegram svg{ width:18px; height:18px; }
+
+    footer{ padding:18px 12px 28px; font-size:.9rem; opacity:.9; text-shadow:0 2px 10px #000 }
+
+    /* Accesibilidad: reducir movimiento si el usuario lo prefiere */
+    @media (prefers-reduced-motion: reduce){
+      .carousel-track{ animation:none }
+      .brand{ animation:none }
+      .card:hover{ transform:none }
+    }
   </style>
 </head>
 <body>
@@ -133,17 +154,16 @@
 
   <header>
     <h1 class="brand">NINA BANDIKOT</h1>
+    <p class="tagline">Photo Packs (18+ • SFW previews)</p>
   </header>
 
-  <p class="intro">Photo Packs (18+ • SFW previews)</p>
-
-  <!-- Tres imágenes con botón -->
+  <!-- ===== Tres imágenes con botón (usa tus archivos en /img) ===== -->
   <section class="packs" aria-label="Paquetes de fotos">
     <article class="card">
       <figure><img src="img/entry.jpg" alt="Entry Pack — vista previa no explícita"></figure>
       <div class="meta">
         <div class="title">Entry Pack</div>
-        <a class="btn-buy" href="#" rel="noopener">Comprar paquete de fotos sin censura ahora</a>
+        <a class="btn-buy tg-link" href="https://t.me/Bandicot001">Comprar paquete de fotos sin censura ahora</a>
       </div>
     </article>
 
@@ -151,7 +171,7 @@
       <figure><img src="img/deluxe.jpg" alt="Deluxe Pack — vista previa no explícita"></figure>
       <div class="meta">
         <div class="title">Deluxe Pack</div>
-        <a class="btn-buy" href="#" rel="noopener">Comprar paquete de fotos sin censura ahora</a>
+        <a class="btn-buy tg-link" href="https://t.me/Bandicot001">Comprar paquete de fotos sin censura ahora</a>
       </div>
     </article>
 
@@ -159,21 +179,28 @@
       <figure><img src="img/bundle.jpg" alt="Bundle — vista previa no explícita"></figure>
       <div class="meta">
         <div class="title">Bundle</div>
-        <a class="btn-buy" href="#" rel="noopener">Comprar paquete de fotos sin censura ahora</a>
+        <a class="btn-buy tg-link" href="https://t.me/Bandicot001">Comprar paquete de fotos sin censura ahora</a>
       </div>
     </article>
   </section>
 
-  <!-- Carrusel de videos abajo -->
+  <!-- ===== Carrusel de videos abajo (usa /videos/video1.mp4 ... video5.mp4) ===== -->
   <section class="video-carousel" aria-label="Carrusel de videos">
     <div class="carousel-track" id="carouselTrack"></div>
     <div class="fade-sides" aria-hidden="true"></div>
   </section>
 
+  <!-- Botón flotante a Telegram -->
+  <a class="floating-telegram tg-link" href="https://t.me/Bandicot001" aria-label="Abrir chat en Telegram">
+    <!-- ícono Telegram -->
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.29 9.2 12.6l8.02-7.25c.35-.32-.07-.49-.54-.27L6.86 11.1 4.24 10.3c-.56-.17-.57-.55.13-.82l16.08-6.22c.46-.17.87.11.72.79l-2.74 12.9c-.12.56-.45.7-.9.43l-4.97-3.67-2.4 2.3c-.27.27-.5.5-.98.37Z"/></svg>
+    <span>@Bandicot001</span>
+  </a>
+
   <footer>© 2025 NINA BANDIKOT. Todos los derechos reservados.</footer>
 
   <script>
-    // EDITA esta lista si tus nombres son distintos
+    /* ===== Carrusel: crea tiles desde una lista y duplica para loop ===== */
     const FILES = [
       'videos/video1.mp4',
       'videos/video2.mp4',
@@ -188,8 +215,7 @@
       const wrap = document.createElement('div');
       wrap.className = 'carousel-item';
       const v = document.createElement('video');
-      v.src = src;
-      v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
+      v.src = src; v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
       v.onerror = () => { wrap.remove(); rebuildLoop(); };
       wrap.appendChild(v);
       return wrap;
@@ -207,10 +233,9 @@
       if (base.length === 0) return;
       base.forEach(el => track.appendChild(el.cloneNode(true)));
     }
-
     build();
 
-    // Garantizar reproducción si el navegador bloquea autoplay
+    // Garantizar autoplay tras primer toque/clic (móviles)
     window.addEventListener('pointerdown', () => {
       document.querySelectorAll('.video-carousel video').forEach(v => v.play().catch(()=>{}));
     }, { once:true });
@@ -220,6 +245,28 @@
         document.querySelectorAll('.video-carousel video').forEach(v => v.play().catch(()=>{}));
       }
     });
+
+    /* ===== Deep link a Telegram con fallback ===== */
+    const tgLinks = document.querySelectorAll('.tg-link');
+    const tgUser = 'Bandicot001'; // cambia aquí si renombraras el usuario en el futuro
+
+    function openTelegram(e){
+      e.preventDefault();
+      const deep = `tg://resolve?domain=${tgUser}`;
+      const web  = `https://t.me/${tgUser}`;
+
+      // Intenta abrir la app y luego fallback al web
+      const now = Date.now();
+      const w = window.open(deep, '_blank');
+
+      setTimeout(() => {
+        // Si el navegador bloquea deep-link o no hay app, abrimos web
+        // Si ya se abrió algo, intentamos abrir también el web para asegurar
+        window.open(web, '_blank', 'noopener');
+      }, 250);
+    }
+
+    tgLinks.forEach(a => a.addEventListener('click', openTelegram));
   </script>
 </body>
 </html>
