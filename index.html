@@ -1,24 +1,51 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NINA BANDIKOT</title>
-  <link rel="stylesheet" href="styles.css" />
-  <meta name="color-scheme" content="dark light" />
-</head>
-<body>
-  <header class="hero">
-    <h1 class="brand">NINA BANDIKOT</h1>
-  </header>
+<!-- ===== Carrusel de videos (abajo) ===== -->
+<section class="video-carousel" aria-label="Carrusel de videos">
+  <div class="carousel-track" id="carouselTrack"></div>
+  <div class="fade-sides" aria-hidden="true"></div>
+</section>
 
-  <main class="container">
-    <h2 class="headline">Bienvenidos</h2>
-    <p class="lead">Explora el contenido exclusivo de Nina Bandikot.</p>
-  </main>
+<script>
+  // Lista esperada (ajusta nombres si usaste otros)
+  const FILES = [
+    'videos/video1.mp4',
+    'videos/video2.mp4',
+    'videos/video3.mp4',
+    'videos/video4.mp4',
+    'videos/video5.mp4',
+  ];
 
-  <!-- ===== Carrusel de videos (abajo de la página) ===== -->
-  <section class="video-carousel" aria-label="Carrusel de videos">
-    <div class="carousel-track" id="carouselTrack">
-      <!-- 5 items base -->
-      <div cla
+  const track = document.getElementById('carouselTrack');
+
+  function makeTile(src){
+    const wrap = document.createElement('div');
+    wrap.className = 'carousel-item';
+    const v = document.createElement('video');
+    v.src = src;
+    v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
+    v.onerror = () => { wrap.remove(); rebuildLoop(); }; // si falla, quitamos el tile
+    wrap.appendChild(v);
+    return wrap;
+  }
+
+  function build(){
+    track.innerHTML = '';
+    FILES.forEach(src => track.appendChild(makeTile(src)));
+    rebuildLoop();
+  }
+
+  function rebuildLoop(){
+    // elimina duplicados previos
+    [...track.children].slice(FILES.length).forEach(n => n.remove());
+    const current = [...track.children];
+    if (current.length === 0) return; // si no hay nada, no clonamos
+    // clona lo que sí existe para lograr el bucle -50%
+    current.forEach(el => track.appendChild(el.cloneNode(true)));
+  }
+
+  build();
+
+  // Reintenta play tras la primera interacción (por si el navegador bloquea autoplay)
+  window.addEventListener('pointerdown', () => {
+    document.querySelectorAll('.video-carousel video').forEach(v => v.play().catch(()=>{}));
+  }, { once:true });
+</script>
