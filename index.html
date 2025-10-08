@@ -1,35 +1,71 @@
-<!-- PEACHES -->
-<article class="card" style="--img:url('img/PORTADA_PEACHES.png')">
-  <div class="card-info">
-    <h2>PEACHES — Vol. 1</h2>
-    <p>39 photos • AI Generated • 18+</p>
-    <a class="btn" href="https://app.hel.io/pay/68e5b1c719f971a5fa52c757" target="_blank">BUY PACK 50 USD</a>
-  </div>
-</article>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NINA BANDIKOT — Digital Packs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#000; --text:#fff; --accent:#ff3cac;
+      --shadow:0 12px 32px rgba(0,0,0,.45);
+      --grad:linear-gradient(90deg,#ffb86b,#ffd54a 30%,#ffbf00 70%,#ff9ad5);
+      --radius:18px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      background:#000;
+      color:var(--text);
+      font-family:'Poppins',system-ui,-apple-system,Arial,Helvetica,sans-serif;
+      text-align:center; overflow-x:hidden;
+    }
 
-<!-- PINKCLOUD -->
-<article class="card" style="--img:url('img/PORTADA_PINKCLOUD.png')">
-  <div class="card-info">
-    <h2>PINKCLOUD — Vol. 1</h2>
-    <p>34 photos • AI Generated • 18+</p>
-    <a class="btn" href="https://app.hel.io/pay/68e5b2f00f29d01fcded0c55" target="_blank">BUY PACK 80 USD</a>
-  </div>
-</article>
+    /* Fondo suave */
+    .page-overlay{position:fixed; inset:0; z-index:-1;
+      background: radial-gradient(120% 90% at 50% 30%, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.9) 100%),
+                  url("img/bg.jpg") center/cover no-repeat fixed;
+      filter:saturate(.9) brightness(.9);
+    }
 
-<!-- SECRETSTASH -->
-<article class="card" style="--img:url('img/PORTADA_SECRETSTASH.png')">
-  <div class="card-info">
-    <h2>SECRETSTASH — Vol. 1</h2>
-    <p>41 photos • AI Generated • 18+</p>
-    <a class="btn" href="https://app.hel.io/pay/68e5b409180d44776e41e06b" target="_blank">BUY PACK 90 USD</a>
-  </div>
-</article>
+    header{padding:60px 20px 30px}
+    header h1{
+      font-size:clamp(36px,7vw,84px);
+      letter-spacing:.12em; text-transform:uppercase;
+      text-shadow:0 0 10px var(--accent), 0 0 30px var(--accent);
+    }
+    header p{opacity:.8; margin-top:8px}
 
-<!-- WHITECLOUD -->
-<article class="card" style="--img:url('img/PORTADA_WHITECLUD.png')">
-  <div class="card-info">
-    <h2>WHITECLOUD — Vol. 1</h2>
-    <p>39 photos • AI Generated • 18+</p>
-    <a class="btn" href="https://app.hel.io/pay/68e5b3a3951e7d65c3971d65" target="_blank">BUY PACK 40 USD</a>
-  </div>
-</article>
+    /* Grid 2×2 */
+    main.grid{
+      max-width:1200px; margin:0 auto; padding:20px 16px 60px;
+      display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px;
+    }
+    @media (max-width:720px){ main.grid{ grid-template-columns:1fr; } }
+
+    /* Card cuadrada con imagen en ::before */
+    .card{
+      position:relative; aspect-ratio:1/1; border-radius:var(--radius);
+      overflow:hidden; background:#111; box-shadow:var(--shadow);
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .card:hover{ transform:translateY(-4px); box-shadow:0 18px 44px rgba(0,0,0,.55); }
+    .card::before{
+      content:""; position:absolute; inset:0;
+      background: var(--img) center/cover no-repeat;
+      filter:brightness(.95); transition:filter .25s ease;
+    }
+    .card:hover::before{ filter:brightness(1.05); }
+
+    /* Panel inferior */
+    .card-info{
+      position:absolute; left:0; right:0; bottom:0; padding:18px 14px;
+      background:linear-gradient(0deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.35) 65%, rgba(0,0,0,0) 100%);
+      display:flex; flex-direction:column; align-items:center; gap:10px;
+    }
+    .card-info h2{
+      margin:0; font-weight:800; letter-spacing:.02em;
+      font-size:clamp(16px,1.8vw,20px);
+      background:linear-gradient(90deg,#ff3cac,#2b86c5);
