@@ -1,201 +1,46 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NINA BANDIKOT</title>
-  <meta name="color-scheme" content="dark light" />
-  <meta name="description" content="Nina Bandikot — Photo Packs (SFW previews). Neon + piel + actitud." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#000; --panel:#0b0b0f; --text:#fff;
-      --brand1:#ff3cac; --brand2:#784ba0; --brand3:#2b86c5;
-      --neon:#ff4fcf; --gold1:#ffd54a; --gold2:#ffbf00;
-      --radius:18px; --shadow:0 12px 32px rgba(0,0,0,.45);
-      --tile:240px; --gap:20px; --speed:40s;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{ margin:0; color:var(--text); font-family:Inter, Arial, Helvetica, sans-serif; text-align:center; background:none; overflow-x:hidden; }
+<!-- TARJETAS (2x2 grande) -->
+<section class="packs" aria-label="Paquetes de fotos">
+  <!-- PEACHES -->
+  <article class="card">
+    <figure><img src="img/PORTADA_PEACHES.png" alt="Pack PEACHES — vista previa no explícita"></figure>
+    <div class="meta">
+      <div class="title">PEACHES — Vol. 1</div>
+      <a class="btn-bubble buy-link" href="https://t.me/Bandikot001" target="_blank" rel="noopener">
+        BUY PACK 19 USD
+      </a>
+    </div>
+  </article>
 
-    /* ===== FONDO FIJO A PANTALLA COMPLETA ===== */
-    .site-bg{ position:fixed; inset:0; z-index:-2;
-      background: #0b0b0f url("img/bg.jpg") center/cover no-repeat fixed;
-    }
-    .site-bg::after{ content:""; position:absolute; inset:0;
-      background: radial-gradient(120% 90% at 50% 30%, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.9) 100%);
-    }
+  <!-- PINKCLOUD -->
+  <article class="card">
+    <figure><img src="img/PORTADA_PINKCLOUD.png" alt="Pack PINKCLOUD — vista previa no explícita"></figure>
+    <div class="meta">
+      <div class="title">PINKCLOUD — Vol. 1</div>
+      <a class="btn-bubble buy-link" href="https://t.me/Bandikot001" target="_blank" rel="noopener">
+        BUY PACK 19 USD
+      </a>
+    </div>
+  </article>
 
-    /* ===== HEADER NEÓN ===== */
-    header{ padding:46px 20px 36px; background:transparent; }
-    .brand{
-      margin:0; text-transform:uppercase; letter-spacing:.15em;
-      font-size: clamp(34px, 8vw, 92px); color:#fff;
-      text-shadow:
-        0 0 6px rgba(255,79,207,.9),
-        0 0 20px rgba(255,79,207,.75),
-        0 0 42px rgba(255,79,207,.5);
-      animation: neonFlicker 6s ease-in-out infinite;
-    }
-    @keyframes neonFlicker{
-      0%,97%,100%{filter:drop-shadow(0 0 22px rgba(255,79,207,.6));opacity:1}
-      11%{opacity:.94} 12%{opacity:.6} 13%{opacity:1}
-      66%{opacity:.96} 67%{opacity:.7} 68%{opacity:1}
-    }
-    .tagline{ margin:6px 0 22px; opacity:.92; text-shadow:0 2px 12px #000 }
+  <!-- SECRET STASH -->
+  <article class="card">
+    <figure><img src="img/PORTADA_SECRETSTASH.png" alt="Pack SECRET STASH — vista previa no explícita"></figure>
+    <div class="meta">
+      <div class="title">SECRET STASH — Vol. 1</div>
+      <a class="btn-bubble buy-link" href="https://t.me/Bandikot001" target="_blank" rel="noopener">
+        BUY PACK 19 USD
+      </a>
+    </div>
+  </article>
 
-    /* ===== TARJETAS ===== */
-    .packs{
-      max-width:1200px; margin:0 auto; padding:10px 16px 8px;
-      display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
-    }
-    @media (max-width:980px){ .packs{grid-template-columns:1fr 1fr} }
-    @media (max-width:620px){ .packs{grid-template-columns:1fr} }
-
-    .card{ background:#111a; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); backdrop-filter:blur(2px);
-      transition:transform .2s ease, box-shadow .2s ease; }
-    .card:hover{ transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.55) }
-    .card figure{ margin:0; line-height:0; background:#000 }
-    .card img{ width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:4/3 }
-    .meta{ padding:14px; display:flex; gap:12px; align-items:center; justify-content:space-between;
-      background:linear-gradient(0deg, #0b0b0feb 0%, #111 100%); }
-    .title{ text-align:left; font-weight:800; letter-spacing:.02em;
-      background:linear-gradient(90deg,var(--brand1),var(--brand3));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      font-size:clamp(14px, 1.8vw, 16px); }
-
-    /* ===== BOTÓN BURBUJA (atractivo) ===== */
-    .btn-bubble{
-      --glow: rgba(255,80,210,.6);
-      --grad: linear-gradient(90deg, #ffb86b, #ffd54a 30%, #ffbf00 70%, #ff9ad5);
-      position:relative; display:inline-block;
-      font-family:'Poppins', system-ui, -apple-system, Arial, sans-serif;
-      font-weight:700; text-decoration:none; text-align:center;
-      color:#1a0b12; font-size:clamp(13px, 1.6vw, 15px);
-      line-height:1.25; white-space:normal; max-width:100%;
-      padding:12px 18px; border-radius:999px; border:1px solid #ffffff2a;
-      background:var(--grad);
-      box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 24px var(--glow),
-                  inset 0 2px 4px rgba(255,255,255,.28), inset 0 -8px 14px rgba(0,0,0,.18);
-      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
-      overflow:hidden;
-    }
-    .btn-bubble::before{ content:""; position:absolute; left:6%; right:6%; top:-30%; height:60%;
-      border-radius:inherit; background:linear-gradient(to bottom, rgba(255,255,255,.35), rgba(255,255,255,0));
-      pointer-events:none; }
-    .btn-bubble:hover{ transform:translateY(-2px); filter:saturate(1.08) brightness(1.03);
-      box-shadow:0 14px 30px rgba(0,0,0,.45), 0 0 34px var(--glow),
-                 inset 0 2px 4px rgba(255,255,255,.32), inset 0 -10px 16px rgba(0,0,0,.2); }
-    @media (max-width:720px){ .meta{flex-direction:column;align-items:stretch} .btn-bubble{width:100%} }
-
-    /* ===== CARRUSEL ===== */
-    .video-carousel{ position:relative; width:100%; overflow:hidden; background:#0b0b0fb0;
-      padding:28px 0; margin:34px 0 0; backdrop-filter:blur(2px); }
-    .carousel-track{ display:inline-flex; gap:var(--gap); padding:0 var(--tile);
-      animation:slide var(--speed) linear infinite; will-change:transform; }
-    .carousel-item{ flex:0 0 auto; width:var(--tile); height:var(--tile);
-      border-radius:16px; overflow:hidden; background:#111; box-shadow:var(--shadow); }
-    .carousel-item video{ width:100%; height:100%; object-fit:cover; display:block; }
-    @keyframes slide{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    .fade-sides::before,.fade-sides::after{ content:""; position:absolute; top:0; bottom:0; width:var(--tile); pointer-events:none; z-index:2; }
-    .fade-sides::before{ left:0; background:linear-gradient(90deg,var(--panel),transparent) }
-    .fade-sides::after{ right:0; background:linear-gradient(270deg,var(--panel),transparent) }
-
-    footer{ padding:18px 12px 28px; font-size:.9rem; opacity:.9; text-shadow:0 2px 10px #000 }
-    @media (prefers-reduced-motion: reduce){ .carousel-track{animation:none} .brand{animation:none} .card:hover{transform:none} }
-  </style>
-</head>
-<body>
-  <!-- Fondo fijo detrás de todo -->
-  <div class="site-bg" aria-hidden="true"></div>
-
-  <header>
-    <h1 class="brand">NINA BANDIKOT</h1>
-    <p class="tagline">Photo Packs (18+ • SFW previews)</p>
-  </header>
-
-  <!-- TARJETAS -->
-  <section class="packs" aria-label="Paquetes de fotos">
-    <article class="card">
-      <figure><img src="img/entry.jpg" alt="Entry Pack — vista previa no explícita"></figure>
-      <div class="meta">
-        <div class="title">Entry Pack</div>
-        <a class="btn-bubble tg-link" href="https://t.me/Bandikot001">Comprar fotos sin censura ahora</a>
-      </div>
-    </article>
-
-    <article class="card">
-      <figure><img src="img/deluxe.jpg" alt="Deluxe Pack — vista previa no explícita"></figure>
-      <div class="meta">
-        <div class="title">Deluxe Pack</div>
-        <a class="btn-bubble tg-link" href="https://t.me/Bandikot001">Comprar fotos sin censura ahora</a>
-      </div>
-    </article>
-
-    <article class="card">
-      <figure><img src="img/bundle.jpg" alt="Bundle — vista previa no explícita"></figure>
-      <div class="meta">
-        <div class="title">Bundle</div>
-        <a class="btn-bubble tg-link" href="https://t.me/Bandikot001">Comprar fotos sin censura ahora</a>
-      </div>
-    </article>
-  </section>
-
-  <!-- CARRUSEL (si no se cargan videos, se oculta solo) -->
-  <section class="video-carousel" aria-label="Carrusel de videos" id="carouselSection" hidden>
-    <div class="carousel-track" id="carouselTrack"></div>
-    <div class="fade-sides" aria-hidden="true"></div>
-  </section>
-
-  <footer>© 2025 NINA BANDIKOT. Todos los derechos reservados.</footer>
-
-  <script>
-    /* ===== Carrusel robusto ===== */
-    const FILES = [
-      'videos/video1.mp4','videos/video2.mp4','videos/video3.mp4',
-      'videos/video4.mp4','videos/video5.mp4',
-    ];
-    const track = document.getElementById('carouselTrack');
-    const section = document.getElementById('carouselSection');
-
-    function makeTile(src){
-      const wrap=document.createElement('div'); wrap.className='carousel-item';
-      const v=document.createElement('video'); v.src=src; v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true;
-      wrap.appendChild(v); return wrap;
-    }
-    async function fileExists(url){
-      try{ const r=await fetch(url, {method:'HEAD', cache:'no-store'}); return r.ok }catch{ return false }
-    }
-    (async function build(){
-      const existing=[];
-      for (const f of FILES){ if (await fileExists(f)) existing.push(f) }
-      if (!existing.length) return; // no mostramos la sección si no hay videos
-      section.hidden=false;
-      existing.forEach(s=> track.appendChild(makeTile(s)));
-      // duplicamos para bucle
-      [...track.children].forEach(el=> track.appendChild(el.cloneNode(true)));
-    })();
-
-    // Garantizar autoplay tras primer toque/clic (móviles)
-    window.addEventListener('pointerdown', () => {
-      document.querySelectorAll('.video-carousel video').forEach(v => v.play().catch(()=>{}));
-    }, { once:true });
-
-    // Deep link Telegram (usuario con K)
-    const tgLinks=document.querySelectorAll('.tg-link');
-    const tgUser='Bandikot001';
-    function openTelegram(e){
-      e.preventDefault();
-      const deep=`tg://resolve?domain=${tgUser}`;
-      const web =`https://t.me/${tgUser}`;
-      // Intento app; fallback web
-      const w=window.open(deep, '_blank'); // puede fallar silencioso
-      setTimeout(()=>window.open(web, '_blank','noopener'), 250);
-    }
-    tgLinks.forEach(a=>a.addEventListener('click', openTelegram));
-  </script>
-</body>
-</html>
+  <!-- WHITECLOUD -->
+  <article class="card">
+    <figure><img src="img/PORTADA_WHITECLUD.png" alt="Pack WHITECLOUD — vista previa no explícita"></figure>
+    <div class="meta">
+      <div class="title">WHITECLOUD — Vol. 1</div>
+      <a class="btn-bubble buy-link" href="https://t.me/Bandikot001" target="_blank" rel="noopener">
+        BUY PACK 19 USD
+      </a>
+    </div>
+  </article>
+</section>
